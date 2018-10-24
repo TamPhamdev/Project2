@@ -291,6 +291,7 @@ li.nav-item>.nav-link:active {
 .title-level {
   background: #fbfbfb;
   position: relative;
+  margin-top: 100px;
   padding: 10px;
   background-repeat: no-repeat;
   background-position: 50% 0%;
