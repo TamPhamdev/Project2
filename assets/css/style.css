@@ -37,7 +37,7 @@ textarea {
   border: 1px solid #ccc !important;
 }
 
-ul > li {
+ul>li {
   list-style: none;
 }
 
@@ -83,20 +83,20 @@ li.nav-item {
   padding: 0 20px;
 }
 
-li.nav-item > a.nav-link {
+li.nav-item>a.nav-link {
   transition: 0.3s;
   color: #fff;
   border-bottom: 1px solid transparent;
 }
 
-li.nav-item > .nav-link:visited,
-li.nav-item > .nav-link:hover,
-li.nav-item > .nav-link:active {
+li.nav-item>.nav-link:visited,
+li.nav-item>.nav-link:hover,
+li.nav-item>.nav-link:active {
   border-color: #fff;
   transition: 0.3s;
 }
 
-.dropdown:hover > .dropdown-menu {
+.dropdown:hover>.dropdown-menu {
   display: block;
 }
 
@@ -169,7 +169,7 @@ li.nav-item > .nav-link:active {
     margin-right: auto;
   }
 
-  .carousel-item > .item1 {
+  .carousel-item>.item1 {
     background-image: url("../img/slide1.jpg");
     height: 70vh;
     background-position: 50% 50%;
@@ -331,12 +331,12 @@ ol.carousel-indicators .active {
   background-color: #252525;
 }
 
-ol.carousel-indicators > li:hover {
+ol.carousel-indicators>li:hover {
   background-color: #252525;
   transition: 0.4s;
 }
 
-ol.carousel-indicators > li {
+ol.carousel-indicators>li {
   border: 2px solid #252525;
   width: 15px;
   height: 15px;
@@ -425,7 +425,7 @@ span.text {
 
 /* Event countdown */
 .wrapper {
-  background: url("../img/sub.jpeg");
+  background: url("../img/itemlist/event.jpg");
   height: 50vh;
   background-position: 50% 50%;
   background-size: cover;
@@ -531,6 +531,9 @@ a.filter_btn:focus {
 /* List item filter */
 .text-card-item {
   margin-top: 15px;
+  border-bottom: 1px solid #252525;
+  width: 85%;
+  padding-bottom: 15px;
 }
 
 a.product-item {
@@ -552,8 +555,9 @@ a.product-item {
   text-transform: uppercase;
 }
 
-/* .price-item {
-  /* margin-bottom: 40px; */
+.price-item {
+  margin: 20px 0 40px 0;
+}
 
 .price-sale {
   font-family: "Montserrat", sans-serif;
@@ -574,6 +578,8 @@ a.product-item {
 }
 
 .cart-icon {
+  position: relative;
+  top: -20px;
   margin-left: 4px;
   font-size: 17px;
   padding: 10px;
@@ -607,7 +613,7 @@ a.product-item {
   text-align: left;
 }
 
-.sub-text > h1 {
+.sub-text>h1 {
   font-weight: 700;
   font-family: "Montserrat", sans-serif;
   font-size: 36px;
@@ -735,15 +741,15 @@ footer {
   font-size: 13px;
 }
 
-.text-account > li {
+.text-account>li {
   padding-bottom: 10px;
 }
 
-.text-account > li > a {
+.text-account>li>a {
   color: #a8a8a8;
 }
 
-.text-contact > li:nth-child(odd) {
+.text-contact>li:nth-child(odd) {
   color: #fff;
 }
 
