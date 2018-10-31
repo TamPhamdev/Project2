@@ -30,16 +30,18 @@
   box-sizing: border-box;
 }
 
+input:focus,
 button:focus {
   outline: none !important;
 }
+
 
 input[type="reset"],
 input[type="number"],
 input[type="text"],
 input[type="email"],
 textarea {
-  outline: none;
+  outline: none !important;
   box-shadow: none !important;
   border: 1px solid #ccc !important;
 }

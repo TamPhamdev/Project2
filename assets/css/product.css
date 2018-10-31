@@ -111,32 +111,19 @@ li.nav-item > .nav-link:active {
 
 #myBtn {
   display: none;
-  /* Hidden by default */
   position: fixed;
-  /* Fixed/sticky position */
   bottom: 20px;
-  /* Place the button at the bottom of the page */
   right: 30px;
-  /* Place the button 30px from the right */
   z-index: 99;
-  /* Make sure it does not overlap */
   border: none;
-  /* Remove borders */
   outline: none;
-  /* Remove outline */
   background-color: #fff;
   box-shadow: 1px 1px 15px -1px rgba(0, 0, 0, 0.6);
-  /* Set a background color */
   color: #555;
-  /* Text color */
   cursor: pointer;
-  /* Add a mouse pointer on hover */
   padding: 10px;
-  /* Some padding */
   border-radius: 50%;
-  /* Rounded corners */
   font-size: 25px;
-  /* Increase font size */
   transition: 0.5s;
 }
 
@@ -331,7 +318,7 @@ label.search-area {
 }
 
 label > .search-field {
-  padding: 16px 30px;
+  padding: 16px 40px;
   border-radius: 100px;
   border: 1px solid #ddd;
   color: #8d8d8d;
@@ -675,15 +662,15 @@ input.coupon {
 .button {
   cursor: pointer;
   border-radius: 100px;
-  color: #8d8d8d;
+  color :#8d8d8d;
   border-width: 0;
   padding: 12px 20px;
   font: 700 16px/30px "Raleway";
-  transition: 0.3s;
+  transition: .3s;
   margin: 0 0 0 20px;
 }
 .button:hover {
-  color: #3d3d3d;
+  color :#3d3d3d;
 }
 
 .button.btn-update {
@@ -695,8 +682,8 @@ input.coupon {
 }
 .action {
   margin: 20px;
-  display: flex;
-  justify-content: space-around;
+display: flex;
+justify-content: space-around;
 }
 
 .pre-checkout {
@@ -704,7 +691,7 @@ input.coupon {
 }
 
 .btn-precheckout {
-  margin-left: 0;
+  margin-left: 0;  
   text-transform: uppercase;
   color: #fff;
   background: #f5614d;
@@ -716,7 +703,7 @@ input.coupon {
 
 .title-pre-check {
   margin-bottom: 20px;
-  font: 400 24px/20px "Montserrat";
+  font: 400 24px/20px 'Montserrat';
   color: #3f3f3f;
 }
 /*End Cart page */
