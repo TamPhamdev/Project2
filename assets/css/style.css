@@ -35,7 +35,7 @@ button:focus {
   outline: none !important;
 }
 
-
+input[type="password"],
 input[type="reset"],
 input[type="number"],
 input[type="text"],
