@@ -3,7 +3,6 @@
   src: url("../font/Montserrat-Regular.ttf");
 }
 
-
 @font-face {
   font-family: Oswald;
   src: url("../font/Oswald-Regular.ttf");
@@ -25,16 +24,13 @@
   src: url("../font/Montserrat-Bold.ttf");
 }
 
-
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-
-ul>li {
+ul > li {
   list-style: none;
 }
 
@@ -81,20 +77,20 @@ li.nav-item {
   padding: 0 20px;
 }
 
-li.nav-item>a.nav-link {
+li.nav-item > a.nav-link {
   transition: 0.3s;
   color: #fff;
   border-bottom: 1px solid transparent;
 }
 
-li.nav-item>.nav-link:visited,
-li.nav-item>.nav-link:hover,
-li.nav-item>.nav-link:active {
+li.nav-item > .nav-link:visited,
+li.nav-item > .nav-link:hover,
+li.nav-item > .nav-link:active {
   border-color: #fff;
   transition: 0.3s;
 }
 
-.dropdown:hover>.dropdown-menu {
+.dropdown:hover > .dropdown-menu {
   display: block;
 }
 
@@ -167,7 +163,7 @@ li.nav-item>.nav-link:active {
     margin-right: auto;
   }
 
-  .carousel-item>.item1 {
+  .carousel-item > .item1 {
     background-image: url("../img/slide1.jpg");
     height: 70vh;
     background-position: 50% 50%;
@@ -287,8 +283,6 @@ li.nav-item>.nav-link:active {
   transition: ease-in-out 0.5s;
 }
 
-
-
 .title-level {
   background: #fbfbfb;
   position: relative;
@@ -306,7 +300,7 @@ li.nav-item>.nav-link:active {
   font-family: "Raleway", sans-serif;
 }
 
-span.home-item>a {
+span.home-item > a {
   color: #8d8d8d;
   text-decoration: none;
   line-height: 24px;
@@ -323,7 +317,6 @@ span.current-item {
   font-weight: bold;
 }
 
-
 .wrapper-product {
   padding: 60px 0;
 }
@@ -337,7 +330,7 @@ label.search-area {
   position: relative;
 }
 
-label>.search-field {
+label > .search-field {
   padding: 16px 30px;
   border-radius: 100px;
   border: 1px solid #ddd;
@@ -390,7 +383,7 @@ input::placeholder {
 
 .widget-title {
   margin-bottom: 25px;
-  font: 400 14px/24px 'Montserrat';
+  font: 400 14px/24px "Montserrat";
   color: #505050;
 }
 
@@ -398,10 +391,10 @@ li.list-group-item {
   padding-left: 0px;
 }
 
-li.list-group-item>a.text-item-list {
+li.list-group-item > a.text-item-list {
   text-transform: uppercase;
   text-align: left;
-  font: 400 13px/22px 'Raleway';
+  font: 400 13px/22px "Raleway";
   color: #8d8d8d;
 }
 
@@ -419,15 +412,15 @@ span.badge {
 }
 
 .layoutleft {
-  background: url('../img/itemlist/asset\ 1.jpeg');
+  background: url("../img/itemlist/asset\ 1.jpeg");
   background-position: 50% 50%;
   background-size: cover;
   background-repeat: no-repeat;
   height: 100vh;
 }
 
-div.product-title>h1 {
-  font: 400 30px/24px 'Montserrat';
+div.product-title > h1 {
+  font: 400 30px/24px "Montserrat";
   color: #3f3f3f;
   border-bottom: 1px solid #ebebeb;
   padding-bottom: 20px;
@@ -440,21 +433,21 @@ div.product-title>h1 {
   margin-bottom: 30px;
 }
 
-.product-price>span {
-  font: 700 24px/30px 'Raleway';
+.product-price > span {
+  font: 700 24px/30px "Raleway";
   color: #3f3f3f;
 }
 
-.product-price>a.review-link {
+.product-price > a.review-link {
   text-decoration: none;
   float: right;
-  font: 400 16px/30px 'Raleway';
+  font: 400 16px/30px "Raleway";
   color: #8d8d8d;
 }
 
-.product-description>p {
+.product-description > p {
   margin-bottom: 30px;
-  font: 400 14px/30px 'Raleway';
+  font: 400 14px/30px "Raleway";
   color: #8d8d8d;
 }
 
@@ -465,7 +458,7 @@ div.product-title>h1 {
 }
 
 .cart-quantity {
-  font: 700 16px/30px 'Raleway';
+  font: 700 16px/30px "Raleway";
   color: #8d8d8d;
   text-align: center;
   width: 90px;
@@ -475,19 +468,19 @@ div.product-title>h1 {
 }
 
 .add-to-cart-btn {
-  font: 700 14px/30px 'Raleway';
+  font: 700 14px/30px "Raleway";
   background: #f5614d;
   color: #fff;
   padding: 15px 15px;
   border-radius: 100px;
   border-width: 0;
   cursor: pointer;
-  transition: .3s;
+  transition: 0.3s;
   text-transform: uppercase;
 }
 
 .add-to-cart-btn:hover {
-  transition: .3s;
+  transition: 0.3s;
   background: #3f3f3f;
 }
 
@@ -496,14 +489,14 @@ div.product-title>h1 {
 }
 
 .cate-title {
-  font: 700 18px/22px 'Raleway';
+  font: 700 18px/22px "Raleway";
   color: #3f3f3f;
 }
 
-div.categories>a {
+div.categories > a {
   text-decoration: none;
   text-transform: uppercase;
-  font: 400 14px/22px 'Raleway';
+  font: 400 14px/22px "Raleway";
   color: #8d8d8d;
 }
 
@@ -551,37 +544,37 @@ div.categories>a {
 
 ul.product-tab-list li {
   cursor: pointer;
-  font: 700 14px/22px 'Raleway';
+  font: 700 14px/22px "Raleway";
   color: #8d8d8d;
 }
 
 .title-tab {
-  font: 600 16px/22px 'Montserrat';
+  font: 600 16px/22px "Montserrat";
   color: #3f3f3f;
 }
 
 .product-info-add {
-  font: italic 400 14px/22px 'Raleway';
+  font: italic 400 14px/22px "Raleway";
   color: #8d8d8d;
 }
 
 .review-author {
-  font: 700 16px/22px 'Raleway';
+  font: 700 16px/22px "Raleway";
   color: #3f3f3f;
 }
 
 .review-published-date {
-  font: 400 14px/25px 'Raleway';
+  font: 400 14px/25px "Raleway";
   color: #b0b0b0;
 }
 
 .description {
-  font: 400 14px/25px 'Raleway';
+  font: 400 14px/25px "Raleway";
   color: #8d8d8d;
 }
 
 .comment-notes {
-  font: 600 18px/25px 'Raleway';
+  font: 600 18px/25px "Raleway";
   color: #3f3f3f;
 }
 
@@ -604,7 +597,7 @@ textarea {
   height: 110px;
   width: 100%;
   padding: 18px 24px;
-  font: 400 14px/25px 'Raleway';
+  font: 400 14px/25px "Raleway";
   color: #8d8d8d;
 }
 
@@ -614,7 +607,7 @@ input[type="email"] {
   padding: 5px 10px;
   line-height: 47px;
   width: 100%;
-  font: 400 14px/25px 'Raleway';
+  font: 400 14px/25px "Raleway";
   color: #8d8d8d;
 }
 
@@ -626,15 +619,107 @@ input[type="email"] {
   cursor: pointer;
   border-width: 0;
   color: #fff;
-  font: 700 16px/30px 'Raleway';
+  font: 700 16px/30px "Raleway";
   text-shadow: 0;
   text-transform: uppercase;
 }
 .related-product-title {
   margin: 20px 0 45px 0;
-  font: 400 24px/22px 'Montserrat';
+  font: 400 24px/22px "Montserrat";
   color: #3f3f3f;
 }
+/* Cart page */
+.img-product-small {
+  width: 85px;
+  height: 85px;
+}
+.product-cart-center {
+  text-align: center;
+  margin: auto;
+  vertical-align: baseline !important;
+}
+
+.wrapper-cart {
+  margin: 40px 0;
+}
+
+.product-title {
+  font: bold 16px/30px "Raleway";
+  color: #3f3f3f;
+}
+td.product-name > a {
+  text-decoration: none;
+  font: 700 14px/30px "Raleway";
+  color: #3f3f3f;
+}
+.td.product-name:hover > a {
+  color: #f5614d;
+}
+.product-price {
+  font: 400 14px/30px "Raleway";
+  color: #8d8d8d;
+}
+
+th.product-remove > a.remove {
+  text-decoration: none;
+  font: 400 24px/30px "Raleway";
+  color: #8d8d8d;
+}
+
+input.coupon {
+  height: 50px;
+  width: 250px;
+  padding: 0 15px;
+}
+
+.button {
+  cursor: pointer;
+  border-radius: 100px;
+  color: #8d8d8d;
+  border-width: 0;
+  padding: 12px 20px;
+  font: 700 16px/30px "Raleway";
+  transition: 0.3s;
+  margin: 0 0 0 20px;
+}
+.button:hover {
+  color: #3d3d3d;
+}
+
+.button.btn-update {
+  margin-left: auto;
+}
+.button.btn-update:hover {
+  color: #fff;
+  background: #f5614d !important;
+}
+.action {
+  margin: 20px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.pre-checkout {
+  margin: 40px 0 60px 0;
+}
+
+.btn-precheckout {
+  margin-left: 0;
+  text-transform: uppercase;
+  color: #fff;
+  background: #f5614d;
+}
+.btn-precheckout:hover {
+  color: #fff;
+  background: #252525;
+}
+
+.title-pre-check {
+  margin-bottom: 20px;
+  font: 400 24px/20px "Montserrat";
+  color: #3f3f3f;
+}
+/*End Cart page */
 
 /* Footer*/
 footer {
@@ -670,15 +755,15 @@ footer {
   font-size: 13px;
 }
 
-.text-account>li {
+.text-account > li {
   padding-bottom: 10px;
 }
 
-.text-account>li>a {
+.text-account > li > a {
   color: #a8a8a8;
 }
 
-.text-contact>li:nth-child(odd) {
+.text-contact > li:nth-child(odd) {
   color: #fff;
 }
 
