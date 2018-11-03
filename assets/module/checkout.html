@@ -90,7 +90,7 @@
                 </h5>
               </div>
 
-              <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+              <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                 <div class="card-body">
                   <form action="" class="form-login">
                     <p> If you have shopped with us before, please enter your details below. If you are a new customer,
@@ -127,22 +127,34 @@
               <div class="container-fluid px-0">
                 <div class="row">
                   <div class="col-md-6">
-                    <label for="firstname">First Name</label>
+                    <label for="firstname">First Name &nbsp;<i class="far fa-check-circle"></i></label>
+
                     <input type="text" required>
                   </div>
                   <div class="col-md-6">
-                    <label for="firstname">Last Name</label>
+                    <label for="firstname">Last Name &nbsp;<i class="far fa-check-circle"></i></label>
                     <input type="text" required>
                   </div>
                 </div>
                 <label for="firstname">Company Name</label>
                 <input type="text">
-                <label for="firstname">Address</label>
+                <label for="firstname">Address &nbsp;<i class="far fa-check-circle"></i></label>
                 <input type="text" required>
-                <label for="firstname">Phone number</label><br>
+                <label for="firstname">Phone number &nbsp;<i class="far fa-check-circle"></i></label><br>
                 <input type="text" pattern="[0-9]*" required> <br>
-                <label for="firstname">Email</label>
+                <label for="firstname">Email &nbsp;<i class="far fa-check-circle"></i></label>
                 <input type="email" required>
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue" data-target="#collapseCreateAccount"
+                      aria-controls="collapseOne" data-toggle="collapse">
+                    Create an account?
+                  </label>
+                  <div id="collapseCreateAccount" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                    <label for="firstname">Create account password <i class="far fa-check-circle"></i> </label>
+                    <input type="password" placeholder="Password">
+                  </div>
+                </div>
               </div>
             </form>
           </div>
@@ -155,8 +167,10 @@
               <input type="text" style="width:100%; height: 120px;">
             </form>
           </div>
+          <button class="btn btn-update" style="bottom: 0px;position:absolute;right:0px;">Order</button>
         </div>
-      </div> <!--End row-->
+      </div>
+      <!--End row-->
     </div>
   </div>
 
