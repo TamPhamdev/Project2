@@ -611,7 +611,7 @@ input[type="email"] {
   font: 700 16px/30px "Raleway";
   text-shadow: 0;
   text-transform: uppercase;
-  transition: .3s;
+  transition: 0.3s;
 }
 
 .submit:hover {
@@ -679,7 +679,7 @@ input.coupon {
   border-width: 0;
   padding: 12px 20px;
   font: 700 16px/30px "Raleway";
-  transition: .3s;
+  transition: 0.3s;
   margin: 0 0 0 20px;
 }
 
@@ -720,18 +720,16 @@ input.coupon {
 
 .title-pre-check {
   margin-bottom: 20px;
-  font: 400 24px/20px 'Montserrat';
+  font: 400 24px/20px "Montserrat";
   color: #3f3f3f;
 }
 
 /*End Cart page */
 
-
-
 /*Check out page*/
 
 .card-header {
-  font: bold 24px/25px 'Montserrat';
+  font: bold 24px/25px "Montserrat";
   color: #3f3f3f;
 }
 
@@ -740,9 +738,47 @@ form.form-login>p {
   color: #8d8d8d;
 }
 
+.field-container {
+  margin: 40px 0;
+}
+
+.btn-order {
+  letter-spacing: 3px;
+  font: 700 16px/30px "Raleway";
+  text-transform: uppercase;
+  box-shadow: 2px 2px 1px 1px #ccc;
+  cursor: pointer;
+  border-width: 0px;
+  border-radius: 100px;
+  background: #f5614d;
+  color: #fff;
+  padding: 10px 25px !important;
+  transition: .4s;
+}
+
+.btn-order:hover {
+  transform: scale3d(1.1, 1.2, 1.1);
+}
+
+.product-name {
+  font: 700 14px/30px "Raleway";
+  color: #3f3f3f;
+}
+
+.total-price {
+  font: 700 14px/24px "Montserrat";
+  color: #505050;
+}
+
+.wrapper-checkout {
+  padding: 40px 0;
+}
+
+.member-login {
+  margin-bottom: 60px;
+}
 
 /*End Check out page*/
-
 
 /* Footer*/
 footer {

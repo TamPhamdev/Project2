@@ -36,14 +36,14 @@
               Shop
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Clothes</a>
-              <a class="dropdown-item" href="#">Shoes</a>
-              <a class="dropdown-item" href="#">Something else here</a>
+              <a class="dropdown-item" href="product-detail.html">Clothes</a>
+              <a class="dropdown-item" href="product-detail.html">Shoes</a>
+              <a class="dropdown-item" href="product-detail.html">Something else here</a>
             </div>
           </li>
           <li class="nav-item"><a class="nav-link" href="">About</a></li>
           <!-- ul here -->
-          <li class="nav-item"><a class="nav-link" href=""><i class="fas fa-shopping-bag"></i></a></li>
+          <li class="nav-item"><a class="nav-link" href="cart.html"><i class="fas fa-shopping-bag"></i></a></li>
           <li class="nav-item">
             <a class="nav-link" href="#">
               <i class="fas fa-search " aria-hidden="true"></i>
@@ -76,7 +76,7 @@
 
 
   <div class="wrapper-checkout">
-    <div class="container">
+    <div class="container member-login">
       <div class="row">
         <div class="col-md-12 col-xs-6">
           <div id="accordion">
@@ -118,7 +118,36 @@
         </div>
       </div>
     </div>
+
     <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col" class="">Product</th>
+                <th scope="col" class="">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="product-name">Basic t-shirt x 1</td>
+                <td class="product-price">$9.99</td>
+              </tr>
+              <tr>
+                <th scope="row">Sub total</th>
+                <td class="product-price">$9.99</td>
+              </tr>
+              <tr>
+                <th scope="row">Total</th>
+                <td colspan="2" class="total-price">$9.99</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="container field-container">
       <div class="row">
         <div class="col-md-6">
           <h3>Billing details</h3>
@@ -167,7 +196,7 @@
               <input type="text" style="width:100%; height: 120px;">
             </form>
           </div>
-          <button class="btn btn-update" style="bottom: 0px;position:absolute;right:0px;">Order</button>
+          <button class="btn-order" style="bottom: 0px;position:absolute;right:0px;">Order</button>
         </div>
       </div>
       <!--End row-->
