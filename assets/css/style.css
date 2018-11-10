@@ -48,6 +48,9 @@ textarea {
 }
 
 
+.reset-underline {
+  text-decoration: none;
+}
 
 ul>li {
   list-style: none;
