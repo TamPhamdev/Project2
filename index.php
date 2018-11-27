@@ -1,3 +1,6 @@
+<?php
+include_once './assets/common/connect.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,7 +23,7 @@
     <!--Header start-->
     <nav class="navbar main-nav sticky-top navbar-expand-md navbar-expand-sm wow fadeInDown" id="nav">
       <!--Navbar start-->
-      <a class="navbar-brand " href="#">AHIHI SHOP</a>
+      <a class="navbar-brand " href="index.php">AHIHI SHOP</a>
       <button class="navbar-toggler  navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
         aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon icon-bar"></span>
@@ -31,15 +34,15 @@
             <a class="nav-link" href="index.html">Home <span class="sr-only"></span></a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="assets/module/product.html" id="navbarDropdown" aria-haspopup="true"
+            <a class="nav-link dropdown-toggle" href="assets/module/product.php" id="navbarDropdown" aria-haspopup="true"
               aria-expanded="false">
               Shop
             </a>
 
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="assets/module/product.html">Clothes</a>
-              <a class="dropdown-item" href="assets/module/product.html">Shoes</a>
-              <a class="dropdown-item" href="assets/module/product.html">Something else here</a>
+              <a class="dropdown-item" href="assets/module/product.php">Clothes</a>
+              <a class="dropdown-item" href="assets/module/product.php">Shoes</a>
+              <a class="dropdown-item" href="assets/module/product.php">Something else here</a>
             </div>
           </li>
           <li class="nav-item"><a class="nav-link " href="">About</a></li>
@@ -381,7 +384,7 @@
         <div style="color:#696969;">&mdash;&mdash;&mdash;</div>
       </div>
     </div>
-    <div class="row filter-content justify-content-center no-gutters">
+<!--    <div class="row filter-content justify-content-center no-gutters">
       <div class="filter-item col-xs">
         <a class="filter_btn" href="">All</a>
       </div>
@@ -394,11 +397,11 @@
       <div class="filter-item col-xs">
         <a class="filter_btn" href="">Category 1</a>
       </div>
-    </div>
-    <div class="item-list-view">
+    </div>-->
+   <div class="item-list-view">
       <div class="container item-list">
-        <div class="row">
-          <a href="index.html" class="product-item">
+        <div class="row" id="data">
+<!--          <a href="index.html" class="product-item">
             <div class="col-md-3 col-xs-6 mx-auto">
               <img class="img-thumbnail img-fluid border-0 no-gutters " src="assets/img/itemlist/asset 10.jpeg" alt="">
               <div class="text-card-item">
@@ -464,7 +467,7 @@
             </div>
           </a>
         </div>
-        <!--End row-->
+        End row
         <div class="row">
           <a href="index.html" class="product-item">
             <div class="col-md-3 col-xs-6 mx-auto">
@@ -530,11 +533,13 @@
                 <a href="#"><i class="fas fa-shopping-cart cart-icon"></i></a>
               </div>
             </div>
-          </a>
+          </a>-->
         </div>
         <!--End row-->
+        <div style="text-align: center;" class="m-4"><a href="assets/module/product.php" class="submit-form p-3" style="text-align: center; text-decoration: none;">Want more ?</a></div>    
       </div>
       <!--End container-->
+    
     </div>
   </div> <!-- End feature products -->
 
@@ -744,6 +749,55 @@
       }); // For Chrome, Firefox, IE and Opera
     }
     new WOW().init();
+    // call ajax
+            var ajax = new XMLHttpRequest();
+            var method = "GET";
+            var url = "./assets/common/display.php";
+            var asynchronous = true;
+            ajax.open(method, url, asynchronous);
+            // send ajax request
+            ajax.send();
+            // receiving  response from data.php
+            ajax.onreadystatechange = function ()
+            {
+                if (this.readyState == 4 && this.status == 200)
+                {
+                    var data = JSON.parse(this.responseText);
+                    var html = "";
+                    for (var i = 0; i < data.length; i++)
+                    {
+                        var id = data[i].PRO_ID;
+                        var img = data[i].PRO_IMG;
+                        var name = data[i].PRO_NAME;
+                        var price = data[i].PRO_PRICE;
+                        var cate = data[i].CATE_NAME;
+                        var description = data[i].PRO_DESCRIPTION;
+                        var season = data[i].PRO_SEASON;
+                        var gender = data[i].PRO_GENDER;
+
+                        html += `                       <a href="index.html" class="product-item">
+            <div class="col-md-3 col-xs-6 mx-auto">
+              <img class="img-thumbnail img-fluid border-0 no-gutters " src="${img}" alt="">
+              <div class="text-card-item">
+                <p class="item-text">${name}</p>
+                <p class="item-text item-text-light">${cate}</p>
+              </div>
+              <div style="display:flex; justify-content: space-between;">
+                <div class="price-item">
+                  <strike class="price-sale">19.99$</strike>
+                  <span class="price">${price}</span>
+                </div>
+                <a href="#"><i class="fas fa-shopping-cart cart-icon"></i></a>
+              </div>
+            </div>
+          </a>
+                                                                        
+                                                `
+                    }
+                    document.getElementById("data").innerHTML = html;
+                    
+                }
+            }
   </script>
 </body>
 

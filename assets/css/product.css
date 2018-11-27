@@ -307,11 +307,21 @@ span.current-item {
 .wrapper-product {
   padding: 60px 0;
 }
+span.pagination_link {
+    cursor:pointer; 
+    padding:6px; 
+    border:1px solid #ccc;
+}
 
 .product {
   margin-bottom: 30px;
 }
-
+#loading {
+ text-align:center; 
+ background: url('../img/Spinner-1s-190px.gif') no-repeat center; 
+ height: 150px;
+ transition-delay: 1s;
+}
 label.search-area {
   width: 100%;
   position: relative;
