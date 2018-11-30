@@ -1,20 +1,19 @@
 <?php
-require_once '../../../assets/common/connect.php'; 
-$cateID = "";
-        if (isset($_GET["id"])) {
-            $cateID = $_GET["id"];
-        } else {
-            header("location:admin.category.php");
-        }
-        $sql = "SELECT CATE_NAME FROM category WHERE CATE_ID =".$cateID;
-        
-        $rs = mysqli_query($cn, $sql);
-        
-         if (mysqli_num_rows($rs) == 0) {
-            die("<h3>Không có dữ liệu admin </h3><br>");
-        }
-        $row = mysqli_fetch_array($rs);
+session_start();
+ if($_SESSION["permission"] != 'News' && $_SESSION["permission"]!= 'All')  
+ {  
+      echo "<script>alert('BẠN KHÔNG ĐỦ QUYỀN TRUY CẬP TRANG NÀY. VUI LÒNG LIÊN HỆ ADMIN ĐỂ BIẾT THÊM CHI TIẾT');window.location.href = '../../index.php';</script>";
+                  exit();
+ } 
+
 ?>
+
+<?php
+include '../../../assets/common/permission.php';
+include '../../../assets/common/connect.php';
+
+?>
+<!doctype html>
 <html lang="en">
 
 <head>
@@ -26,6 +25,9 @@ $cateID = "";
   <link href="../../../assets/css/admin.css" rel="stylesheet">
   <link href="../../../assets/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+   <script src="../../../assets/js/jquery-3.3.1.min.js"></script>
+        <script src="../../../assets/js/popper.min.js"></script>
+        <script src="../../../assets/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -56,15 +58,15 @@ $cateID = "";
           <div class="col-md-3 col-sm-3 sidebar-left mx-auto">
             <ul>
               <li class="item-dashboard"><a href="../../index.php" class="reset-underline">Introduction</a></li>
-              <li class="item-dashboard"><a href="../../module/account/account.html" class="reset-underline"><i class="fas fa-user-secret"></i>Admin</a></li>
+              <li class="item-dashboard"><a href="../../module/account/account.php" class="reset-underline"><i class="fas fa-user-secret"></i>Admin</a></li>
               <li class="item-dashboard"><a href="../../module/product/admin.product.php" class="reset-underline"><i
                     class="fas fa-box"></i>Product</a></li>
-              <li class="item-dashboard"><a href="../../module/category/admin.category.php" class="reset-underline" style='color: #f5614d;'><i
+              <li class="item-dashboard"><a href="../../module/category/admin.category.php" class="reset-underline"><i
                     class="fas fa-clipboard-list"></i>Categories</a></li>
               <li class="item-dashboard"><a href="../../module/order/admin.order.html" class="reset-underline"><i class="fas fa-dolly"></i>Order</a></li>
               <li class="item-dashboard"><a href="../../module/customer/admin.customer.html" class="reset-underline"><i
                     class="fas fa-user-friends"></i>Customer</a></li>
-              <li class="item-dashboard"><a href="../../module/news/admin.news.php" class="reset-underline"><i class="far fa-bell"></i>News</a></li>
+              <li class="item-dashboard"><a href="../../module/news/admin.news.php" class="reset-underline" style='color: #f5614d;'><i class="far fa-bell"></i>News</a></li>
               <li class="item-dashboard"><a href="../../module/feedback/admin.feedback.html" class="reset-underline"><i
                     class="far fa-envelope"></i>Feedback</a></li>
               <li class="item-dashboard"><a href="../../module/comment/admin.comment.html" class="reset-underline"><i
@@ -74,21 +76,28 @@ $cateID = "";
           <div class="col-md-9 col-sm 9">
             <div class="sidebar-right">
               <div class="container">
-                <div class="row ">
-                  <div class="col-md-8 col-sm-8 mx-auto">
-                    <h3 class="text-center">Edit category</h3>
-                    <div class="create-product text-center mx-auto">
-                        <form action="updateDB.category.php" method="GET" id="dataEdit">
-                        <label for="new-cate">Rename category</label>
-                        <input type="text" id="new-cate" name="newNameCate"  value="<?php echo "$row[0]"; ?>"  style="margin:40px 0px;">
-                        <div class="comfirm text-center">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <h3 class=" text-center">News management board</h3>
+                    <a href="create.news.php" class="btn btn-success text-left">Add new post</a>
+                    <table class="table table-responsive margin-40">
+                      <thead>
+                        <tr>
+                          <th scope="col">ID</th>
+                          <th scope="col">Image</th>
+                          <th scope="col">Title</th>
+                          <th scope="col">Content</th>
+                          <th scope="col">Time</th>
+                          <th scope="col"></th>
+                          <th scope="col"></th>
+                          <th scope="col"></th>
+                        </tr>
+                      </thead>
+                      <tbody id="data">
                           
-                          <button type="submit" name="submit" class="btn btn-success" style="margin: 0 40px;">Confirm</button>
-                          <a href="admin.category.php" class="btn btn-danger">Back</a>
-                           <input type="" name="cateID" hidden value="<?php echo"$cateID";?>">
-                        </div><br>
-                      </form>
-                    </div>
+                            <!-- jax call here -->
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </div>
@@ -99,12 +108,11 @@ $cateID = "";
     </div>
   </div>
 
-
-<script>
-          // call ajax
+    <script>
+             // call ajax
             var ajax = new XMLHttpRequest();
-            var method = "GET";
-            var url = "../category/category.display.php";
+            var method = "POST";
+            var url = "../news/news.display.php";
             var asynchronous = true;
             ajax.open(method, url, asynchronous);
             // send ajax request
@@ -113,28 +121,40 @@ $cateID = "";
             ajax.onreadystatechange = function ()
             {
                 if (this.readyState == 4 && this.status == 200)
-                {
+                {  
                     var data = JSON.parse(this.responseText);
-                    console.log(this.responseText);
                     var html = "";
+                  
                     for (var i = 0; i < data.length; i++)
-                    {  
-                        var cate = data[i].CATE_NAME;
-                        
+                    { 
+                        var id = data[i].NEWS_ID;
+                        var title = data[i].NEWS_TITLE;
+                        var img = data[i].NEWS_IMG;
+                        var date = data[i].NEWS_DATE;
+                        var content = data[i].NEWS_CONTENT;
                         html += ` 
-                            <option value="${cate}">${cate}</option>
-                       `
+                          <tr>
+                          <th scope="row">${id}</th>
+                          <td> <img src="${img}" alt="" style="width:70px; height:70px;"></td>
+                          <td>${title}</td>
+                          <td class="text-muted module line-clamp">${content}</td>    
+                          <td class="text-muted">${date}</td>
+                          <td><a href="../../../assets/module/news.detail.php?id=${id}" class="btn btn-success">View</a></td>
+                          <td><a href="edit.news.php?id=${id}" class="btn btn-success reset-underline">Edit</a></td>
+                          <td><a href="delete.news.php?id=${id}" class="btn btn-danger reset-underline">Delete</a></td>
+                        </tr>
+                           `
                     }
-                    document.getElementById("nameCategory").innerHTML = html;
+                     document.getElementById("data").innerHTML = html;
                 }
-            }
-    </script>    
-
-
-
-  <script src="../../../assets/js/jquery-3.3.1.min.js"></script>
-  <script src="../../../assets/js/popper.min.js"></script>
-  <script src="../../../assets/js/bootstrap.min.js"></script>
+            }    
+             </script>
+        <script src="../../../assets/js/jquery-3.3.1.min.js"></script>
+        <script src="../../../assets/js/popper.min.js"></script>
+        <script src="../../../assets/js/bootstrap.min.js"></script>
 </body>
 
 </html>
+
+
+                           `

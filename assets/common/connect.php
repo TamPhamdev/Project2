@@ -3,7 +3,7 @@
 <?php
 
 $connect = new PDO('mysql:host=localhost;dbname=ahihishop', 'root', '');
-session_start();
+//session_start(); Mở laij session nếu product bị lỗi
 $server = "localhost";
 $uid = "root";
 $pwd = "";

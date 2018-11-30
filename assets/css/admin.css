@@ -49,7 +49,10 @@ input:focus,
 button:focus {
     outline: none !important;
 }
-
+.link-active {
+    background-color: #f2f7fb !important;
+    color: #f5614d !important;
+}
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
@@ -120,3 +123,17 @@ li a:focus {
 .far {
     padding-right: 20px;
 }
+
+
+.module {
+    display: -webkit-box;
+    max-width: 200px;
+    height: 60px;
+    margin: 0 auto;
+    line-height: 1.2;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+

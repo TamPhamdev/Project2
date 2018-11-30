@@ -31,7 +31,7 @@
             <a class="nav-link" href="../../index.html">Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="product.html" id="navbarDropdown" role="button" aria-haspopup="true"
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" aria-haspopup="true"
               aria-expanded="false">
               Shop
             </a>
@@ -55,153 +55,45 @@
   </div>
   <!--Navbar End-->
 
-  <!--Carousel was here-->
 
 
   <div class="title-level col-xs-6">
     <div class="container">
       <div class="row align-item-center ">
         <div class="col-md-8 col-xs-6">
-          <h2 style="font-family: 'Montserrat';font-weight: 700" ;>Shop</h2>
+          <h2 style="font-family: 'Montserrat';font-weight: 700" ;>About</h2>
         </div>
         <div class="col-md-4 title-bar mr-auto">
           <span class="home-item"><a href="../../index.html">Home</a></span>
           <span class="separator">></span>
-          <span class="current-item">Checkout</span>
+          <span class="current-item">About</span>
         </div>
       </div>
     </div>
   </div>
-
-
-
-  <div class="wrapper-checkout">
-    <div class="container member-login">
-      <div class="row">
-        <div class="col-md-12 col-xs-6">
-          <div id="accordion">
-            <div class="card">
-              <div class="card-header" id="headingOne">
-                <h5 class="mb-0">
-                  <a class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
-                    aria-controls="collapseOne">
-                    Are you a member ? Click here to <b>login</b>
-                  </a>
-                </h5>
-              </div>
-
-              <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-                <div class="card-body">
-                  <form action="" class="form-login">
-                    <p> If you have shopped with us before, please enter your details below. If you are a new customer,
-                      please proceed to the Billing & Shipping section.</p>
-                    <div class="container">
-                      <div class="row">
-                        <div class="col-md-6">
-                          <label for="username">Email or Username&nbsp;<i class="far fa-check-circle"></i></label>
-                          <input type="email">
-                        </div>
-                        <div class="col-md-6">
-                          <label for="password">Password&nbsp;<i class="far fa-check-circle"></i></label><br>
-                          <input type="password">
-                        </div>
-                      </div>
-                      <button type="submit" class="submit">Login</button>
-                      <span><a href="#" style="text-decoration: none; color: #eb5541; font: 400 16px/30px 'Raleway'; padding-left: 20px;">Lost
-                          your password?</a></span>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
+  <div class="about-wrapper mt-md-4 mb-md-4">
     <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th scope="col" class="">Product</th>
-                <th scope="col" class="">Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="product-name">Basic t-shirt x 1</td>
-                <td class="product-price">$9.99</td>
-              </tr>
-              <tr>
-                <th scope="row">Sub total</th>
-                <td class="product-price">$9.99</td>
-              </tr>
-              <tr>
-                <th scope="row">Total</th>
-                <td colspan="2" class="total-price">$9.99</td>
-              </tr>
-            </tbody>
-          </table>
+      <div class=" row text-left ">
+        <div class="col-md-6 col-sm-6 mx-auto">
+            <h4>Who we are</h4>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sunt repellat, doloribus optio doloremque est, iure deserunt reprehenderit laborum dignissimos aut culpa error! Rem, voluptatum distinctio. Ullam, consequatur, blanditiis error ipsa in qui doloremque atque esse ea veniam dicta, repellendus accusantium. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat asperiores sequi distinctio aspernatur a maiores cumque recusandae culpa deleniti reiciendis!</p>
+            <form action="">
+              <h4>Feedback</h4>
+              <label for="">Name</label>
+              <input type="text" required>
+              <label for="">Email</label>
+              <input type="email" required>
+              <label for="">Phone number</label>
+              <input type="text" required><br>
+              <label for="">Content</label>
+              <input type="text" style="height:100px;">
+              <button class="btn btn-success mt-md-5">Send</button>
+            </form>
         </div>
       </div>
-    </div>
-    <div class="container field-container">
-      <div class="row">
-        <div class="col-md-6">
-          <h3>Billing details</h3>
-          <div class="bill-fill-info">
-            <form action="#">
-              <div class="container-fluid px-0">
-                <div class="row">
-                  <div class="col-md-6">
-                    <label for="firstname">First Name &nbsp;<i class="far fa-check-circle"></i></label>
-
-                    <input type="text" required>
-                  </div>
-                  <div class="col-md-6">
-                    <label for="firstname">Last Name &nbsp;<i class="far fa-check-circle"></i></label>
-                    <input type="text" required>
-                  </div>
-                </div>
-                <label for="firstname">Company Name</label>
-                <input type="text">
-                <label for="firstname">Address &nbsp;<i class="far fa-check-circle"></i></label>
-                <input type="text" required>
-                <label for="firstname">Phone number &nbsp;<i class="far fa-check-circle"></i></label><br>
-                <input type="text" pattern="[0-9]*" max="9" required> <br>
-                <label for="firstname">Email &nbsp;<i class="far fa-check-circle"></i></label>
-                <input type="email" required>
-                <div class="form-check">
-                  <label class="form-check-label">
-                    <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue" data-target="#collapseCreateAccount"
-                      aria-controls="collapseOne" data-toggle="collapse">
-                    Create an account?
-                  </label>
-                  <div id="collapseCreateAccount" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-                    <label for="firstname">Create account password <i class="far fa-check-circle"></i> </label>
-                    <input type="password" placeholder="Password">
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <h3>Additional information</h3>
-          <div class="bill-fill-info">
-            <form action="#">
-              <label for="">Order notes (optional)</label>
-              <input type="text" style="width:100%; height: 120px;">
-            </form>
-          </div>
-          <button class="btn-order" style="bottom: 0px;position:absolute;right:0px;">Order</button>
-        </div>
-      </div>
-      <!--End row-->
     </div>
   </div>
+
 
 
 
@@ -272,9 +164,9 @@
   </footer>
   <!--End footer-->
   <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fas fa-angle-up" style="margin:0; padding: 0; width: 34px;"></i></button>
-  <script src="../js/jquery-3.3.1.min.js"></script>
-  <script src="../js/popper.min.js"></script>
-  <script src="../js/bootstrap.min.js"></script>
+  <script src="assets/js/jquery-3.3.1.min.js"></script>
+  <script src="assets/js/popper.min.js"></script>
+  <script src="assets/js/bootstrap.min.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       let nav = document.querySelector('#nav');

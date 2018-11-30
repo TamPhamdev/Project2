@@ -46,10 +46,13 @@ textarea {
   box-shadow: none !important;
   border: 1px solid #ccc !important;
 }
-
+.link-active {
+    color: #fff;
+    border-bottom: 1px solid #fff;
+}
 
 .reset-underline {
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 ul>li {
@@ -99,16 +102,17 @@ li.nav-item {
 }
 
 li.nav-item>a.nav-link {
-  transition: 0.3s;
+  transition: .3s;
   color: #fff;
   border-bottom: 1px solid transparent;
 }
 
-li.nav-item>.nav-link:visited,
-li.nav-item>.nav-link:hover,
-li.nav-item>.nav-link:active {
+li.nav-item>a.nav-link:visited,
+li.nav-item>a.nav-link:hover,
+li.nav-item>a.nav-link:active {
   border-color: #fff;
-  transition: 0.3s;
+/*  transition: .3s;*/
+  border-bottom: 1px solid #fff;
 }
 
 .dropdown:hover>.dropdown-menu {
@@ -404,7 +408,7 @@ ol.carousel-indicators>li {
 
 .half-img-order {
   height: 100vh;
-  background: url("../img/shoesbanner.jpg");
+  background: url("../img/collection-woman.png");
   background-position: 50% 50%;
   background-size: cover;
   background-repeat: no-repeat;

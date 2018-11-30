@@ -34,25 +34,16 @@ include_once '../common/connect.php';
                         <li class="nav-item active">
                             <a class="nav-link" href="../../index.php">Home <span class="sr-only">(current)</span></a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" aria-haspopup="true"
+                        <li class="nav-item">
+                            <a class="nav-link " href="product.php" id="navbarDropdown" role="button" aria-haspopup="true"
                                aria-expanded="false">
                                 Shop
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="product-detail.html">Clothes</a>
-                                <a class="dropdown-item" href="product-detail.html">Shoes</a>
-                                <a class="dropdown-item" href="product-detail.html">Something else here</a>
-                            </div>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="">About</a></li>
+                        <li class="nav-item"><a class="nav-link " href="news.php">News</a></li>
+                        <li class="nav-item"><a class="nav-link " href="about.php">About</a></li>
                         <!-- ul here -->
-                        <li class="nav-item"><a class="nav-link" href="cart.html"><i class="fas fa-shopping-bag"></i></a></li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="fas fa-search " aria-hidden="true"></i>
-                            </a>
-                        </li>
+                        <li class="nav-item"><a class="nav-link" href="cart.php"><i class="fas fa-shopping-bag"></i></a></li>
                     </ul>
                 </div>
             </nav>
@@ -82,7 +73,7 @@ include_once '../common/connect.php';
                     <div class="row" style="padding-bottom: 45px;">
                         <div class="col-md-3">
                             <label class="search-area">
-                                <input type="text" placeholder="Search products" name="search_text" class="search-field" id="search_text">
+                                <input type="text" placeholder="Search products by name" name="search_text" class="search-field" id="search_text">
                                 <button type="submit" class="search-submit form"> <i class="fas fa-search " aria-hidden="true"
                                                                                      aria-required="true"></i></button>
                             </label>
@@ -96,7 +87,7 @@ include_once '../common/connect.php';
                                     <option value="low_price" class="low_price">Sort by price: Low to hight</option>
                                 </select>
                             </form>
-                            <p class="result-count">Showing <strong>1-9 </strong>of <strong>10</strong> </p>
+<!--                            <p class="result-count">Showing <strong>1-9 </strong>of <strong>10</strong> </p>-->
                         </div>
                     </div>
                     <!--End row-->
@@ -105,7 +96,7 @@ include_once '../common/connect.php';
                             <h3>Price</h3>
                             <input type="hidden" id="hidden_minimum_price" value="0" />
                             <input type="hidden" id="hidden_maximum_price" value="300" />
-                            <p id="price_show">10 - 300</p>
+                            <p id="price_show" class="price">10 - 300</p>
                                  <div id="price_range"></div>
 
                             <?php
@@ -125,15 +116,32 @@ include_once '../common/connect.php';
                             }
                             ?>                      
                             <h3 class="widget-title">Top Rated Products</h3>
-                            <ul class="list-group-flush">
-                                <li class="list-group-item d-flex align-items-center justify-content-between">
-                                    <a href=""><img src="../img/itemlist/asset 3.jpeg" alt="" class="img-list-group"></a>
-                                    <span>Fantasy pants</span>
-                                    <span>$9.99</span>
-                                </li>
+                            <div class="top-rate-product"> 
+                                 <ul class="list-group-flush">
+                               
+                                    <?php
+                            $query = "SELECT PRO_ID, PRO_NAME, PRO_PRICE, PRO_IMG"
+                             . " FROM product WHERE PRO_STATUS ='Active' LIMIT 4";
+                            // . " WHERE product.CATE_ID = category.CATE_ID"
+                           
+                            $stm = $connect->prepare($query);
+                            $stm->execute();
+                            $result1 = $stm->fetchAll();
+                            foreach ($result1 as $row)
+                            {
+                                ?>
+                                 <li class="list-group-item d-flex align-items-center justify-content-between">     
+                                 <a href="product-detail.php?id=<?php echo $row['PRO_ID']?>"><img src="<?php echo $row['PRO_IMG']?>" alt="" class="img-list-group"></a>
+                                        <span class="price"><?php echo $row['PRO_NAME']?></span>
+                                        <span class="price">$<?php echo $row['PRO_PRICE']?></span>
+                                 </li>      
+                                <?php
+                            }
+                            ?> </ul>                                
+<!--                                </li>
                                 <ul class="list-group-flush">
                                     <li class="list-group-item d-flex align-items-center justify-content-between">
-                                        <a href=""><img src="../img/itemlist/asset 4.jpeg" alt="" class="img-list-group"></a>
+                                        <a href="product-detail.php"><img src="../img/itemlist/asset 4.jpeg" alt="" class="img-list-group"></a>
                                         <span>Striped Watch</span>
                                         <span>$19.99</span>
                                     </li>
@@ -149,7 +157,8 @@ include_once '../common/connect.php';
                                                 <span>Simple hat</span>
                                                 <span>$15.99</span>
                                             </li>
-                                        </ul>
+                                        </ul>-->
+                            </div>
                                         </div>    
                                         <div class="col-md-9 column-right">
                                             <div class="row filter_data" id="pagination_data">

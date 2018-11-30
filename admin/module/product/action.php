@@ -35,7 +35,7 @@ if (isset($_POST["action"])) {
             if ($row["PRO_STATUS"] == 'Active') {
                 $status = '<span class="badge badge-success p-2">HIỂN THỊ</span> ';
             } else {
-                $status = '<span class="badge badge-danger pl-4 pr-4 pb-2 pt-2"> ẨN</span> ';
+                $status = '<span class="badge badge-secondary pl-4 pr-4 pb-2 pt-2"> ẨN</span> ';
             }
             $output .= '
             <tbody id="data">

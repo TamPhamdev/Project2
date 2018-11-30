@@ -44,7 +44,7 @@ $productID = "";
         <header>
             <nav class="navbar sticky-top navbar-expand-md navbar-expand-sm wow fadeInDown" id="nav">
                 <!--Navbar start-->
-                <a class="navbarnd " href="../../index.html">Adminator</a>
+                <a class="navbarnd " href="../../index.php">Adminator</a>
                 <button class="navbar-toggler  navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
                         aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon icon-bar"></span>
@@ -55,7 +55,7 @@ $productID = "";
                             <a class="nav-link" href="../../module/account/account.html"> <i class="fas fa-user-secret"></i>Admin <span
                                     class="sr-only"></span></a>
                         </li>
-                        <li class="nav-item"><a class="nav-link " href="login.html">Logout</a></li>
+                        <li class="nav-item"><a class="nav-link " href="../../logout.php">Logout</a></li>
                         <!-- ul here -->
                     </ul>
                 </div>
@@ -67,16 +67,16 @@ $productID = "";
                     <div class="row">
                         <div class="col-md-3 col-sm-3 sidebar-left mx-auto">
                             <ul>
-                                <li class="item-dashboard"><a href="../../index.html" class="reset-underline">Introduction</a></li>
+                                <li class="item-dashboard"><a href="../../index.php" class="reset-underline">Introduction</a></li>
                                 <li class="item-dashboard"><a href="../../module/account/account.html" class="reset-underline"><i class="fas fa-user-secret"></i>Admin</a></li>
-                                <li class="item-dashboard"><a href="../../module/product/admin.product.php" class="reset-underline"><i
+                                <li class="item-dashboard"><a href="../../module/product/admin.product.php" class="reset-underline" style='color: #f5614d;'><i
                                             class="fas fa-box"></i>Product</a></li>
                                 <li class="item-dashboard"><a href="../../module/category/admin.category.php" class="reset-underline"><i
                                             class="fas fa-clipboard-list"></i>Categories</a></li>
                                 <li class="item-dashboard"><a href="../../module/order/admin.order.html" class="reset-underline"><i class="fas fa-dolly"></i>Order</a></li>
                                 <li class="item-dashboard"><a href="../../module/customer/admin.customer.html" class="reset-underline"><i
                                             class="fas fa-user-friends"></i>Customer</a></li>
-                                <li class="item-dashboard"><a href="../../module/news/admin.news.html" class="reset-underline"><i class="far fa-bell"></i>News</a></li>
+                                            <li class="item-dashboard"><a href="../../module/news/admin.news.php" class="reset-underline"><i class="far fa-bell"></i>News</a></li>
                                 <li class="item-dashboard"><a href="../../module/feedback/admin.feedback.html" class="reset-underline"><i
                                             class="far fa-envelope"></i>Feedback</a></li>
                                 <li class="item-dashboard"><a href="../../module/comment/admin.comment.html" class="reset-underline"><i
@@ -91,34 +91,42 @@ $productID = "";
                                             <h3 class="text-center">Edit product</h3>
                                             <div class="create-product text-left mx-auto d-flex justify-content-between">
                                                 <form action="updateDB.product.php" method="GET" style="width:100%;" id="data-edit-product">
-                                                                                                       <label for="nameProduct">Tên sản phẩm</label>
-                                                                                                        <input type="text" id="nameProduct" required style="margin-left:60px;" name="proName"  value="<?php echo "$row[1]" ?>"><br>
-                                                                                                        <label for="priceProduct">Giá cả</label>
-                                                                                                        <input type="number" required pattern="0+\.[0-9]*[1-9][0-9]*$" min="0" onkeypress="return event.charCode >= 48 && event.charCode <= 57"
-                                                                                                               style="margin-left:114px;" id="priceProduct" name="proPrice" value="<?php echo "$row[2]" ?>"><br>
-                                                                                                        <label for="nameCategory">Chủng loại</label>
-                                                                                                        <select type="text" id="cate-option" name="cateName"  required  style="margin-left:82px;">
+                                                    <div class="form-group row">
+                                                         <label class="col-sm-6 col-form-label" for="nameProduct">Tên sản phẩm</label>
+                                                         <div class="col-sm-6">
+                                                            <input class="form-control" type="text" id="nameProduct" required  name="proName"  value="<?php echo "$row[1]" ?>">
+                                                         </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label  class="col-sm-6 col-form-label" for="priceProduct">Giá cả</label>
+                                                        <div class="col-sm-6">
+                                                           <input  class="form-control"  type="number" required pattern="0+\.[0-9]*[1-9][0-9]*$" min="0" onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                                                                                                               id="priceProduct" name="proPrice" value="<?php echo "$row[2]" ?>"><br>
+                                                        </div> 
+                                                    </div>    
+                                                                                                        <label class="col-sm-6 col-form-label" for="nameCategory">Chủng loại</label>
+                                                                                                        <select class="form-control"  type="text" id="cate-option" name="cateName"  required  style="margin-left:82px;">
                                                                                                            
                                                                                                         </select>
                                                                                                         <br>
-                                                                                                        <label for="gender">Giới tính</label>
-                                                                                                        <select id="gender" name="proGender"  style="margin-left:98px;">
-                                                                                                            <option value="unisex">Unisex</option>
-                                                                                                            <option value="male">Male</option>
-                                                                                                            <option value="female">Female</option>
+                                                                                                        <label class="col-sm-6 col-form-label" for="gender">Giới tính</label>
+                                                                                                        <select  class="form-control" id="gender" name="proGender"  style="margin-left:98px;">
+                                                                                                            <option value="Unisex" <?php if($row['PRO_GENDER'] == 'Unisex'){echo 'selected= "selected"';}?>>Unisex</option>
+                                                                                                            <option value="Male" <?php if($row['PRO_GENDER'] == 'Male'){echo 'selected= "selected"';}?>>Male</option>
+                                                                                                            <option value="Female" <?php if($row['PRO_GENDER'] == 'Female'){echo 'selected= "selected"';}?>>Female</option>
                                                                                                         </select><br>
-                                                                                                        <label for="season">Mùa</label>
-                                                                                                        <select id="season" name="proSeason" style="margin-left:125px;"  value="">
-                                                                                                            <option value="All">All</option>
-                                                                                                            <option value="Summer">Summer</option>
-                                                                                                            <option value="Winter">Winter</option>
-                                                                                                            <option value="Fall">Fall</option>
-                                                                                                            <option value="Spring">Spring</option>
+                                                                                                        <label class="col-sm-6 col-form-label" for="season">Mùa</label>
+                                                                                                        <select class="form-control"  id="season" name="proSeason" style="margin-left:125px;"  value="">
+                                                                                                            <option value="All"  <?php if($row['PRO_SEASON'] == 'All'){echo 'selected= "selected"';}?>>All</option>
+                                                                                                            <option value="Summer" <?php if($row['PRO_SEASON'] == 'Summer'){echo 'selected= "selected"';}?>>Summer</option>
+                                                                                                            <option value="Winter" <?php if($row['PRO_SEASON'] == 'Winter'){echo 'selected= "selected"';}?>>Winter</option>
+                                                                                                            <option value="Fall" <?php if($row['PRO_SEASON'] == 'Fall'){echo 'selected= "selected"';}?>>Fall</option>
+                                                                                                            <option value="Spring" <?php if($row['PRO_SEASON'] == 'Spring'){echo 'selected= "selected"';}?>>Spring</option>
                                                                                                         </select><br>
-                                                                                                        <label for="descriptionProduct">Mô tả</label>
-                                                                                                        <input type="text" id="descriptionProduct" name="proDescription"   value="<?php echo "$row[4]" ?>" required  style="margin-left: 114px;"> <br>
-                                                                                                        <label for="imgProdct">Hình ảnh</label>
-                                                                                                        <input type="text"  id="inputGroupFile" name="proImg"  value="<?php echo "$row[3]" ?>" style="margin-left:90px;">
+                                                                                                        <label class="col-sm-6 col-form-label" for="descriptionProduct">Mô tả</label>
+                                                                                                        <input  class="form-control" type="text" id="descriptionProduct" name="proDescription"   value="<?php echo "$row[4]" ?>" required  style="margin-left: 114px;"> <br>
+                                                                                                        <label class="col-sm-6 col-form-label" for="imgProdct">Hình ảnh</label>
+                                                                                                        <input class="form-control" type="text"  id="inputGroupFile" name="proImg"  value="<?php echo "$row[3]" ?>" style="margin-left:90px;">
                                                                                                         <br>
                                                                                                        <div class="comfirm text-center">
                                                                                                             <button type="submit" class="btn btn-success" name="updateProduct" style="margin: 0 40px;">Xác nhận</button>

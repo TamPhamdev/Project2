@@ -340,7 +340,12 @@ input::placeholder {
   font-weight: 400;
   font-family: "Raleway", sans-serif;
 }
-
+p.news-detail-text {
+    font-family: "Raleway", sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: #3f3f3f;
+}
 .form {
   color: #8d8d8d;
   cursor: pointer;
@@ -379,7 +384,7 @@ input::placeholder {
 }
 
 .widget-title {
-  margin-bottom: 25px;
+  margin: 35px 0;
   font: 400 14px/24px "Montserrat";
   color: #505050;
 }
@@ -408,8 +413,15 @@ span.badge {
   padding: 60px 0;
 }
 
+.page-link {
+   border-radius: 50% !important;
+   border-width:0 !important;
+   background-color: #f5614d !important;
+   color: #fff !important;
+   margin: 6px !important;
+   padding: 10px 15px !important;
+}
 .layoutleft {
-  background: url("../img/itemlist/asset\ 1.jpeg");
   background-position: 50% 50%;
   background-size: cover;
   background-repeat: no-repeat;
@@ -496,7 +508,11 @@ div.categories>a {
   font: 400 14px/22px "Raleway";
   color: #8d8d8d;
 }
-
+.categories {
+    margin: 40px 0;
+   display: flex;
+   justify-content: space-between;
+}
 .share-social {
   margin: 30px 0;
   display: flex;
@@ -603,7 +619,6 @@ input[type="password"],
 input[type="text"],
 input[type="email"] {
   -webkit-appearance: none;
-  padding: 5px 10px;
   line-height: 47px;
   width: 100%;
   font: 400 14px/25px "Raleway";

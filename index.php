@@ -1,5 +1,15 @@
 <?php
 include_once './assets/common/connect.php';
+$sql = "SELECT PRO_ID, PRO_NAME, PRO_PRICE,PRO_IMG, CATE_NAME, PRO_DESCRIPTION,PRO_SEASON,PRO_GENDER"
+        . " FROM product, category"
+        . " WHERE product.CATE_ID = category.CATE_ID AND PRO_STATUS = 'Active'";
+
+$rs = mysqli_query($cn, $sql);
+
+if (mysqli_num_rows($rs) == 0) {
+    die("<h3>Không có dữ liệu admin </h3><br>");
+}
+$row = mysqli_fetch_array($rs);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,28 +41,19 @@ include_once './assets/common/connect.php';
       <div class="collapse navbar-collapse justify-content-end" id="navbarTogglerDemo02">
         <ul class="navbar-nav">
           <li class="nav-item active">
-            <a class="nav-link" href="index.html">Home <span class="sr-only"></span></a>
+            <a class="nav-link  " href="index.php">Home <span class="sr-only"></span></a>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="assets/module/product.php" id="navbarDropdown" aria-haspopup="true"
-              aria-expanded="false">
+          <li class="nav-item ">
+            <a class="nav-link" href="assets/module/product.php" id="navbarDropdown">
               Shop
             </a>
 
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="assets/module/product.php">Clothes</a>
-              <a class="dropdown-item" href="assets/module/product.php">Shoes</a>
-              <a class="dropdown-item" href="assets/module/product.php">Something else here</a>
-            </div>
           </li>
-          <li class="nav-item"><a class="nav-link " href="">About</a></li>
+          <li class="nav-item"><a class="nav-link " href="assets/module/news.php">News</a></li>
+          <li class="nav-item"><a class="nav-link " href="assets/module/about.php">About</a></li>
           <!-- ul here -->
           <li class="nav-item"><a class="nav-link" href=""><i class="fas fa-shopping-bag"></i></a></li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <i class="fas fa-search " aria-hidden="true"></i>
-            </a>
-          </li>
+          
         </ul>
       </div>
     </nav>
@@ -77,7 +78,7 @@ include_once './assets/common/connect.php';
                     <h4 class="text3">now starting at <b>$99.00</b></h4>
                   </div>
                   <div class="text_3">
-                    <a class="btn btn_primary" href="">Shop now</a>
+                      <a class="btn btn_primary" href="assets/module/product.php">Shop now</a>
                   </div>
                 </div>
               </div>
@@ -94,7 +95,7 @@ include_once './assets/common/connect.php';
                     <h4 class="text3">Limited Quantity* <b>$49.00</b></h4>
                   </div>
                   <div style="position: absolute;margin-top:350px;">
-                    <a class="btn btn_primary" href="">Shop now</a>
+                    <a class="btn btn_primary" href="assets/module/product.php">Shop now</a>
                   </div>
                 </div>
               </div>
@@ -158,75 +159,72 @@ include_once './assets/common/connect.php';
               <div class="carousel-inner" role="listbox">
                 <div class="carousel-item active">
                   <div class="row">
-                    <a href="#" class="product-item">
+                       <?php
+                            $query = "SELECT PRO_ID, PRO_NAME, PRO_PRICE,  CATE_NAME, PRO_IMG, PRO_GENDER"
+                             . " FROM product,category WHERE product.CATE_ID = category.CATE_ID "
+                             . "AND PRO_STATUS ='Active' ORDER BY RAND() LIMIT 2";
+                           
+                            $stm = $connect->prepare($query);
+                            $stm->execute();
+                            $result1 = $stm->fetchAll();
+                            foreach ($result1 as $row)
+                            {
+                                ?>
+                                <a href="assets/module/product-detail.php?id=<?php echo $row["PRO_ID"]?>" class="product-item">
                       <div class="col-md-6 col-xs-6">
-                        <img class="img-thumbnail border-0 " src="assets/img/itemlist/asset 10.jpeg" alt="">
+                        <img class="img-thumbnail border-0 " src="<?php echo $row["PRO_IMG"]?>" alt="">
                         <div class="text-card-item">
-                          <p class="item-text">Havanna shirt</p>
-                          <p class="item-text item-text-light">Clothing, shirt</p>
+                          <p class="item-text"><?php echo $row["PRO_NAME"]?></p>
+                          <p class="item-text item-text-light"><?php echo $row["CATE_NAME"]?></p>
                         </div>
                         <div style="display:flex; justify-content: space-between;">
                           <div class="price-item">
-                            <strike class="price-sale">19.99$</strike>
-                            <span class="price">10.99$</span>
+                            <strike class="price"><?php echo $row["PRO_GENDER"]?></strike>
+                            <span class="price">$<?php echo $row["PRO_PRICE"]?></span>
                           </div>
                           <a href="#"><i class="fas fa-shopping-cart cart-icon"></i></a>
                         </div>
                       </div>
-                    </a>
-                    <a href="#" class="product-item">
-                      <div class="col-md-6 col-xs-6 ">
-                        <img class="img-thumbnail border-0 " src="assets/img/itemlist/asset 10.jpeg" alt="">
-                        <div class="text-card-item">
-                          <p class="item-text">Havanna shirt</p>
-                          <p class="item-text item-text-light">Clothing, shirt</p>
-                        </div>
-                        <div style="display:flex; justify-content: space-between;">
-                          <div class="price-item">
-                            <strike class="price-sale">19.99$</strike>
-                            <span class="price">10.99$</span>
-                          </div>
-                          <a href="#"><i class="fas fa-shopping-cart cart-icon"></i></a>
-                        </div>
-                      </div>
-                    </a>
+                    </a> 
+                                <?php
+                            }
+                            ?> 
+
 
                   </div>
                 </div>
                 <div class="carousel-item">
                   <div class="row">
-                    <a href="#" class="product-item">
-                      <div class="col-md-6 col-xs-6 ">
-                        <img class="img-thumbnail border-0 " src="assets/img/itemlist/asset 10.jpeg" alt="">
+                    <?php
+                            $query = "SELECT PRO_ID, PRO_NAME, PRO_PRICE,  CATE_NAME, PRO_IMG, PRO_GENDER"
+                             . " FROM product,category WHERE product.CATE_ID = category.CATE_ID "
+                             . "AND PRO_STATUS ='Active' ORDER BY RAND() LIMIT 2";
+                           
+                            $stm = $connect->prepare($query);
+                            $stm->execute();
+                            $result1 = $stm->fetchAll();
+                            foreach ($result1 as $row)
+                            {
+                                ?>
+                                <a href="assets/module/product-detail.php?id=<?php echo $row["PRO_ID"]?>" class="product-item">
+                      <div class="col-md-6 col-xs-6">
+                        <img class="img-thumbnail border-0 " src="<?php echo $row["PRO_IMG"]?>" alt="">
                         <div class="text-card-item">
-                          <p class="item-text">Havanna shirt</p>
-                          <p class="item-text item-text-light">Clothing, shirt</p>
+                          <p class="item-text"><?php echo $row["PRO_NAME"]?></p>
+                          <p class="item-text item-text-light"><?php echo $row["CATE_NAME"]?></p>
                         </div>
                         <div style="display:flex; justify-content: space-between;">
                           <div class="price-item">
-                            <strike class="price-sale">19.99$</strike>
-                            <span class="price">10.99$</span>
+                            <strike class="price"><?php echo $row["PRO_GENDER"]?></strike>
+                            <span class="price">$<?php echo $row["PRO_PRICE"]?></span>
                           </div>
                           <a href="#"><i class="fas fa-shopping-cart cart-icon"></i></a>
                         </div>
                       </div>
-                    </a>
-                    <a href="#" class="product-item">
-                      <div class="col-md-6 col-xs-6 ">
-                        <img class="img-thumbnail border-0 " src="assets/img/itemlist/asset 10.jpeg" alt="">
-                        <div class="text-card-item">
-                          <p class="item-text">Havanna shirt</p>
-                          <p class="item-text item-text-light">Clothing, shirt</p>
-                        </div>
-                        <div style="display:flex; justify-content: space-between;">
-                          <div class="price-item">
-                            <strike class="price-sale">19.99$</strike>
-                            <span class="price">10.99$</span>
-                          </div>
-                          <a href="#"><i class="fas fa-shopping-cart cart-icon"></i></a>
-                        </div>
-                      </div>
-                    </a>
+                    </a> 
+                                <?php
+                            }
+                            ?> 
 
                   </div>
                 </div>
@@ -247,7 +245,7 @@ include_once './assets/common/connect.php';
         <!--Row 2-->
         <div class="col-md-6 col-xs-12 half-content-left wow fadeInRight">
           <div class="showcase-item">
-            <h3><span class="lang1"> New shoes collection</span></h3>
+            <h3><span class="lang1"> New Woman collection</span></h3>
             <p><span class="lang2">Yes, this is our new collection, check it out our new arrivals.</span></p>
             <div id="carouselId2" class="carousel slide" data-ride="carousel">
               <ol class="carousel-indicators">
@@ -257,73 +255,72 @@ include_once './assets/common/connect.php';
               <div class="carousel-inner" role="listbox">
                 <div class="carousel-item active">
                   <div class="row px-0">
-                    <a href="#" class="product-item">
-                      <div class="col-md-6 col-xs-6 mx-auto">
-                        <img class="img-thumbnail img-fluid border-0 " src="assets/img/itemlist/shoes1.jpeg" alt="">
+                   <?php
+                            $query = "SELECT PRO_ID, PRO_NAME, PRO_PRICE,  CATE_NAME, PRO_IMG, PRO_GENDER"
+                             . " FROM product,category WHERE product.CATE_ID = category.CATE_ID "
+                             . "AND PRO_STATUS ='Active' ORDER BY RAND() LIMIT 2";
+                           
+                            $stm = $connect->prepare($query);
+                            $stm->execute();
+                            $result1 = $stm->fetchAll();
+                            foreach ($result1 as $row)
+                            {
+                                ?>
+                                <a href="assets/module/product-detail.php?id=<?php echo $row["PRO_ID"]?>" class="product-item">
+                      <div class="col-md-6 col-xs-6">
+                        <img class="img-thumbnail border-0 " src="<?php echo $row["PRO_IMG"]?>" alt="">
                         <div class="text-card-item">
-                          <p class="item-text">Havanna shirt</p>
-                          <p class="item-text item-text-light">Clothing, shirt</p>
+                          <p class="item-text"><?php echo $row["PRO_NAME"]?></p>
+                          <p class="item-text item-text-light"><?php echo $row["CATE_NAME"]?></p>
                         </div>
                         <div style="display:flex; justify-content: space-between;">
                           <div class="price-item">
-                            <strike class="price-sale">19.99$</strike>
-                            <span class="price">10.99$</span>
+                            <strike class="price"><?php echo $row["PRO_GENDER"]?></strike>
+                            <span class="price">$<?php echo $row["PRO_PRICE"]?></span>
                           </div>
                           <a href="#"><i class="fas fa-shopping-cart cart-icon"></i></a>
                         </div>
                       </div>
-                    </a>
-                    <div class="col-md-6 col-xs-6 mx-auto">
-                      <img class="img-thumbnail img-fluid border-0 " src="assets/img/itemlist/shoes2.jpeg" alt="">
-                      <div class="text-card-item">
-                        <p class="item-text">Havanna shirt</p>
-                        <p class="item-text item-text-light">Clothing, shirt</p>
-                      </div>
-                      <div style="display:flex; justify-content: space-between;">
-                        <div class="price-item">
-                          <strike class="price-sale">19.99$</strike>
-                          <span class="price">10.99$</span>
-                        </div>
-                        <a href="#"><i class="fas fa-shopping-cart cart-icon"></i></a>
-                      </div>
-                    </div>
-                    </a>
+                    </a> 
+                                <?php
+                            }
+                            ?> 
+                  
                   </div>
                 </div>
-                <div class="carousel-item no-gutters px-0">
-                  <div class="row  px-0">
-                    <a href="#" class="product-item">
-                      <div class="col-md-6 col-xs-6 mx-auto">
-                        <img class="img-thumbnail img-fluid border-0 " src="assets/img/itemlist/asset 16.jpeg" alt="">
+                <div class=" carousel-item no-gutters px-0">
+                  <div class="row px-0">
+                   <?php
+                            $query = "SELECT PRO_ID, PRO_NAME, PRO_PRICE,  CATE_NAME, PRO_IMG, PRO_GENDER"
+                             . " FROM product,category WHERE product.CATE_ID = category.CATE_ID "
+                             . "AND PRO_STATUS ='Active' ORDER BY RAND() LIMIT 2";
+                           
+                            $stm = $connect->prepare($query);
+                            $stm->execute();
+                            $result1 = $stm->fetchAll();
+                            foreach ($result1 as $row)
+                            {
+                                ?>
+                                <a href="assets/module/product-detail.php?id=<?php echo $row["PRO_ID"]?>" class="product-item">
+                      <div class="col-md-6 col-xs-6">
+                        <img class="img-thumbnail border-0 " src="<?php echo $row["PRO_IMG"]?>" alt="">
                         <div class="text-card-item">
-                          <p class="item-text">Havanna shirt</p>
-                          <p class="item-text item-text-light">Clothing, shirt</p>
+                          <p class="item-text"><?php echo $row["PRO_NAME"]?></p>
+                          <p class="item-text item-text-light"><?php echo $row["CATE_NAME"]?></p>
                         </div>
                         <div style="display:flex; justify-content: space-between;">
                           <div class="price-item">
-                            <strike class="price-sale">19.99$</strike>
-                            <span class="price">10.99$</span>
+                            <strike class="price"><?php echo $row["PRO_GENDER"]?></strike>
+                            <span class="price">$<?php echo $row["PRO_PRICE"]?></span>
                           </div>
                           <a href="#"><i class="fas fa-shopping-cart cart-icon"></i></a>
                         </div>
                       </div>
-                    </a>
-                    <a href="#" class="product-item">
-                      <div class="col-md-6 col-xs-6 mx-auto">
-                        <img class="img-thumbnail img-fluid border-0 " src="assets/img/itemlist/asset 16.jpeg" alt="">
-                        <div class="text-card-item">
-                          <p class="item-text">Havanna shirt</p>
-                          <p class="item-text item-text-light">Clothing, shirt</p>
-                        </div>
-                        <div style="display:flex; justify-content: space-between;">
-                          <div class="price-item">
-                            <strike class="price-sale">19.99$</strike>
-                            <span class="price">10.99$</span>
-                          </div>
-                          <a href="#"><i class="fas fa-shopping-cart cart-icon"></i></a>
-                        </div>
-                      </div>
-                    </a>
+                    </a> 
+                                <?php
+                            }
+                            ?> 
+                  
                   </div>
                 </div>
               </div>
@@ -333,7 +330,7 @@ include_once './assets/common/connect.php';
         <div class="col-md-6 col-xs-12 px-0 banner-right banner-right-order wow fadeInLeft delay-0.5s">
           <div class="banner-text">
             <div class="banner-ct-area">
-              <span class="text">Shoes <br>Collection</span>
+              <span class="text">Woman <br>Collection</span>
             </div>
           </div>
           <div class="half-img-order"></div>
@@ -401,139 +398,7 @@ include_once './assets/common/connect.php';
    <div class="item-list-view">
       <div class="container item-list">
         <div class="row" id="data">
-<!--          <a href="index.html" class="product-item">
-            <div class="col-md-3 col-xs-6 mx-auto">
-              <img class="img-thumbnail img-fluid border-0 no-gutters " src="assets/img/itemlist/asset 10.jpeg" alt="">
-              <div class="text-card-item">
-                <p class="item-text">Havanna shirt</p>
-                <p class="item-text item-text-light">Clothing, shirt</p>
-              </div>
-              <div style="display:flex; justify-content: space-between;">
-                <div class="price-item">
-                  <strike class="price-sale">19.99$</strike>
-                  <span class="price">10.99$</span>
-                </div>
-                <a href="#"><i class="fas fa-shopping-cart cart-icon"></i></a>
-              </div>
-            </div>
-          </a>
-          <a href="index.html" class="product-item">
-            <div class="col-md-3 col-xs-6 mx-auto">
-              <img class="img-thumbnail img-fluid border-0 no-gutters " src="assets/img/itemlist/asset 13.jpeg" alt="">
-              <div class="text-card-item">
-                <p class="item-text">Havanna shirt</p>
-                <p class="item-text item-text-light">Clothing, shirt</p>
-              </div>
-              <div style="display:flex; justify-content: space-between;">
-                <div class="price-item">
-                  <strike class="price-sale">19.99$</strike>
-                  <span class="price">10.99$</span>
-                </div>
-                <a href="#"><i class="fas fa-shopping-cart cart-icon"></i></a>
-              </div>
-            </div>
-          </a>
-
-          <a href="index.html" class="product-item">
-            <div class="col-md-3 col-xs-6 mx-auto">
-              <img class="img-thumbnail img-fluid border-0 no-gutters " src="assets/img/itemlist/asset 1.jpeg" alt="">
-              <div class="text-card-item">
-                <p class="item-text">Havanna shirt</p>
-                <p class="item-text item-text-light">Clothing, shirt</p>
-              </div>
-              <div style="display:flex; justify-content: space-between;">
-                <div class="price-item">
-                  <strike class="price-sale">19.99$</strike>
-                  <span class="price">10.99$</span>
-                </div>
-                <a href="#"><i class="fas fa-shopping-cart cart-icon"></i></a>
-              </div>
-            </div>
-          </a>
-          <a href="index.html" class="product-item">
-            <div class="col-md-3 col-xs-6 mx-auto">
-              <img class="img-thumbnail img-fluid border-0 no-gutters " src="assets/img/itemlist/asset 2.jpeg" alt="">
-              <div class="text-card-item">
-                <p class="item-text">Havanna shirt</p>
-                <p class="item-text item-text-light">Clothing, shirt</p>
-              </div>
-              <div style="display:flex; justify-content: space-between;">
-                <div class="price-item">
-                  <strike class="price-sale">19.99$</strike>
-                  <span class="price">10.99$</span>
-                </div>
-                <a href="#"><i class="fas fa-shopping-cart cart-icon"></i></a>
-              </div>
-            </div>
-          </a>
-        </div>
-        End row
-        <div class="row">
-          <a href="index.html" class="product-item">
-            <div class="col-md-3 col-xs-6 mx-auto">
-              <img class="img-thumbnail img-fluid border-0 no-gutters " src="assets/img/itemlist/asset 15.jpeg" alt="">
-              <div class="text-card-item">
-                <p class="item-text">Havanna shirt</p>
-                <p class="item-text item-text-light">Clothing, shirt</p>
-              </div>
-              <div style="display:flex; justify-content: space-between;">
-                <div class="price-item">
-                  <strike class="price-sale">19.99$</strike>
-                  <span class="price">10.99$</span>
-                </div>
-                <a href="#"><i class="fas fa-shopping-cart cart-icon"></i></a>
-              </div>
-            </div>
-          </a>
-          <a href="index.html" class="product-item">
-            <div class="col-md-3 col-xs-6 mx-auto">
-              <img class="img-thumbnail img-fluid border-0 no-gutters " src="assets/img/itemlist/asset 18.jpeg" alt="">
-              <div class="text-card-item">
-                <p class="item-text">Havanna shirt</p>
-                <p class="item-text item-text-light">Clothing, shirt</p>
-              </div>
-              <div style="display:flex; justify-content: space-between;">
-                <div class="price-item">
-                  <strike class="price-sale">19.99$</strike>
-                  <span class="price">10.99$</span>
-                </div>
-                <a href="#"><i class="fas fa-shopping-cart cart-icon"></i></a>
-              </div>
-            </div>
-          </a>
-
-          <a href="index.html" class="product-item">
-            <div class="col-md-3 col-xs-6 mx-auto">
-              <img class="img-thumbnail img-fluid border-0 no-gutters " src="assets/img/itemlist/asset 19.jpeg" alt="">
-              <div class="text-card-item">
-                <p class="item-text">Havanna shirt</p>
-                <p class="item-text item-text-light">Clothing, shirt</p>
-              </div>
-              <div style="display:flex; justify-content: space-between;">
-                <div class="price-item">
-                  <strike class="price-sale">19.99$</strike>
-                  <span class="price">10.99$</span>
-                </div>
-                <a href="#"><i class="fas fa-shopping-cart cart-icon"></i></a>
-              </div>
-            </div>
-          </a>
-          <a href="index.html" class="product-item">
-            <div class="col-md-3 col-xs-6 mx-auto">
-              <img class="img-thumbnail img-fluid border-0 no-gutters " src="assets/img/itemlist/asset 3.jpeg" alt="">
-              <div class="text-card-item">
-                <p class="item-text">Havanna shirt</p>
-                <p class="item-text item-text-light">Clothing, shirt</p>
-              </div>
-              <div style="display:flex; justify-content: space-between;">
-                <div class="price-item">
-                  <strike class="price-sale">19.99$</strike>
-                  <span class="price">10.99$</span>
-                </div>
-                <a href="#"><i class="fas fa-shopping-cart cart-icon"></i></a>
-              </div>
-            </div>
-          </a>-->
+                <!--ajax data here-->
         </div>
         <!--End row-->
         <div style="text-align: center;" class="m-4"><a href="assets/module/product.php" class="submit-form p-3" style="text-align: center; text-decoration: none;">Want more ?</a></div>    
@@ -615,10 +480,10 @@ include_once './assets/common/connect.php';
                         font-size: 20px;">Follow
                       us on</span>
                     <div class="social-icon-group">
-                      <a class="social-icon" href="index.html"><i class="fab fa-twitter"></i></a>
-                      <a class="social-icon" href="index.html"><i style="width: 24px !important; text-align: center;"
+                      <a class="social-icon" href="index.php"><i class="fab fa-twitter"></i></a>
+                      <a class="social-icon" href="index.php"><i style="width: 24px !important; text-align: center;"
                           class="fab fa-facebook-f"></i></a>
-                      <a class="social-icon" href="index.html"><i class="fab fa-youtube"></i></a>
+                      <a class="social-icon" href="index.php"><i class="fab fa-youtube"></i></a>
                     </div>
                   </div>
                 </div>
@@ -651,8 +516,8 @@ include_once './assets/common/connect.php';
             <span class="title-top">My account</span>
             <div class="footer-content">
               <ul class="text-account">
-                <li><a href="#">About us</a></li>
-                <li><a href="#">Contact us</a></li>
+                  <li><a href="assets/module/about.php">About us</a></li>
+                <li><a href="assets/module/about.php">Contact us</a></li>
                 <li><a href="#">Login</a></li>
                 <li><a href="#">My account</a></li>
                 <li><a href="#">FAQ</a></li>
@@ -764,6 +629,10 @@ include_once './assets/common/connect.php';
                 {
                     var data = JSON.parse(this.responseText);
                     var html = "";
+                    if(data.length > 8)
+                    {
+                        data.length = 8;
+                    }
                     for (var i = 0; i < data.length; i++)
                     {
                         var id = data[i].PRO_ID;
@@ -775,7 +644,7 @@ include_once './assets/common/connect.php';
                         var season = data[i].PRO_SEASON;
                         var gender = data[i].PRO_GENDER;
 
-                        html += `                       <a href="index.html" class="product-item">
+                        html += `                       <a href="assets/module/product-detail.php?id=${id}" class="product-item">
             <div class="col-md-3 col-xs-6 mx-auto">
               <img class="img-thumbnail img-fluid border-0 no-gutters " src="${img}" alt="">
               <div class="text-card-item">
@@ -784,18 +653,16 @@ include_once './assets/common/connect.php';
               </div>
               <div style="display:flex; justify-content: space-between;">
                 <div class="price-item">
-                  <strike class="price-sale">19.99$</strike>
-                  <span class="price">${price}</span>
+                  <span class="item-text">${gender}</span>
+                  <span class="price">$${price}</span>
                 </div>
                 <a href="#"><i class="fas fa-shopping-cart cart-icon"></i></a>
               </div>
             </div>
           </a>
-                                                                        
-                                                `
+                                                `;
                     }
                     document.getElementById("data").innerHTML = html;
-                    
                 }
             }
   </script>

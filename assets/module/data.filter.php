@@ -36,10 +36,10 @@ if(isset($_POST["search_text"]))
 {
     $query = "SELECT *"
                 . " FROM product, category"
-                . " WHERE PRO_NAME OR CATE_NAME LIKE '%".$_POST["search_text"]."%' "
+                . " WHERE PRO_NAME  LIKE '%".$_POST["search_text"]."%' "
             . "AND product.CATE_ID = category.CATE_ID AND PRO_STATUS = 'Active'";
 }    
-echo $query;
+//echo $query;
  // filter price
  if(isset($_POST["minimum_price"], $_POST["maximum_price"]) && !empty($_POST["minimum_price"]) && !empty($_POST["maximum_price"]))
  {
@@ -75,7 +75,7 @@ echo $query;
   foreach($result as $row)
   {
    $output .= '
-    <a href="index.html" class="product-item">
+    <a href="product-detail.php?id='.$row["PRO_ID"].'" class="product-item">
                 <div class="col-md-4 col-xs-6 product">
                   <img class="img-thumbnail img-fluid border-0 no-gutters" src=' . $row["PRO_IMG"] . ' alt="">
                   <div class="text-card-item">
@@ -84,6 +84,7 @@ echo $query;
                   </div>
                   <div style="display:flex; justify-content: space-between;">
                     <div class="price-item">
+                        <span class="price">'.$row["PRO_GENDER"].'</span>
                       <span class="price">$'.$row["PRO_PRICE"].'</span>
                     </div>
                     <a href="#"><i class="fas fa-shopping-cart cart-icon"></i></a>
