@@ -1,10 +1,10 @@
 <?php
-include_once '../../assets/common/connect.php';
+include_once '../common/connect.php';
+
 $prodetail_ID = "";
 if (isset($_GET["id"])) {
     $prodetail_ID = $_GET["id"];
-} 
-else {
+} else {
     header("location:../../index.php");
 }
 $sql = "SELECT PRO_ID, PRO_NAME, PRO_PRICE,PRO_IMG, CATE_NAME, PRO_DESCRIPTION,PRO_SEASON,PRO_GENDER"
@@ -20,9 +20,11 @@ $rs1 = mysqli_query($cn, $sql1);
 if (mysqli_num_rows($rs) == 0) {
     die("<h3>Không có dữ liệu admin </h3><br>");
 }
+
 $row = mysqli_fetch_array($rs);
 ?>
 <!DOCTYPE html>
+<!--<meta http-equiv="refresh" content="50">-->
 <html lang="en">
 
     <head>
@@ -54,16 +56,25 @@ $row = mysqli_fetch_array($rs);
                         <li class="nav-item active">
                             <a class="nav-link" href="../../index.php">Home <span class="sr-only">(current)</span></a>
                         </li>
-                       <li class="nav-item">
-                            <a class="nav-link " href="product.php" id="navbarDropdown" role="button" aria-haspopup="true"
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="product.php" id="navbarDropdown" role="button" aria-haspopup="true"
                                aria-expanded="false">
                                 Shop
                             </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="product-detail.php">Clothes</a>
+                                <a class="dropdown-item" href="product-detail.php">Shoes</a>
+                                <a class="dropdown-item" href="product-detail.php">Something else here</a>
+                            </div>
                         </li>
-                        <li class="nav-item"><a class="nav-link " href="news.php">News</a></li>
-                        <li class="nav-item"><a class="nav-link " href="about.php">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="">About</a></li>
                         <!-- ul here -->
                         <li class="nav-item"><a class="nav-link" href="cart.php"><i class="fas fa-shopping-bag"></i></a></li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fas fa-search " aria-hidden="true"></i>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </nav>
@@ -102,7 +113,7 @@ $row = mysqli_fetch_array($rs);
                                     <h1><?php echo $row[1] ?></h1>
                                 </div>
                                 <div class="product-price"><span>$<?php echo $row[2] ?></span>
-                                    <a href="#review-tab" class="review-link">(<?php echo mysqli_num_rows($rs1)?> customer reviews)</a>
+                                    <a href="#review-tab" class="review-link">(3 customer reviews)</a>
                                 </div>
 
                                 <!--              <div class="product-description">
@@ -116,11 +127,11 @@ $row = mysqli_fetch_array($rs);
                                 </form>
                                 <div class="categories">
                                     <span class="cate-title">Categories: </span>
-                                    <a href="#0" style="cursor: default;" class="cate-title reset-underline"><?php echo $row[4] ?></a>
+                                    <a href="#0" style="cursor: default;"><?php echo $row[4] ?></a>
                                     <span class="cate-title">Season: </span>
-                                    <a href="#0" style="cursor: default;" class="cate-title reset-underline"><?php echo $row[6] ?></a>
+                                    <a href="#0" style="cursor: default;"><?php echo $row[6] ?></a>
                                     <span class="cate-title">Gender: </span>
-                                    <a href="#0" style="cursor: default;" class="cate-title reset-underline"><?php echo $row[7] ?></a>
+                                    <a href="#0" style="cursor: default;"><?php echo $row[7] ?></a>
                                 </div>
                                 <div class="share-social">
                                     <div class="share-social-btn">
@@ -154,8 +165,8 @@ $row = mysqli_fetch_array($rs);
                                 <div class="info-tab">
                                     <div id="description-tab" class="collapse show" data-parent="#mygroup">
                                         <span class="title-tab">Product description</span>
-                                        <p style="font: 700 16px/22px 'Raleway';
-                                           color: #3f3f3f;"><?php echo $row[4] ?></p>
+                                        <p style="font: 400 14px/22px 'Raleway';
+                                           color: #8d8d8d;"><?php echo $row[4] ?></p>
                                     </div>
                                     <div id="info-tab" class="collapse" data-parent="#mygroup">
                                         <span class="title-tab">Additional Infomation</span>
@@ -180,7 +191,7 @@ $row = mysqli_fetch_array($rs);
                                     </div>
                                     <div id="review-tab" class="collapse" data-parent="#mygroup">
                                         <div class="comment">
-                                            <span class="review-title title-tab"></span>
+                                            <span class="review-title title-tab">3 reviews for Basic t-shirt</span>
                                             <div class="comment-list">
                                                 <ul class="list-group list-group-flush">
                                                     <li class="list-group-item">

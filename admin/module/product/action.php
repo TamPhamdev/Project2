@@ -33,9 +33,9 @@ if (isset($_POST["action"])) {
         foreach ($result1 as $row) {
             $status = '';
             if ($row["PRO_STATUS"] == 'Active') {
-                $status = '<span class="badge badge-success p-2">HIỂN THỊ</span> ';
+                $status = '<span class="badge badge-success p-2">ACTIVE</span> ';
             } else {
-                $status = '<span class="badge badge-secondary pl-4 pr-4 pb-2 pt-2"> ẨN</span> ';
+                $status = '<span class="badge badge-secondary pl-2 pr-2 pb-2 pt-2"> INACTIVE</span> ';
             }
             $output .= '
             <tbody id="data">
@@ -50,8 +50,8 @@ if (isset($_POST["action"])) {
                     <td>' . $row["PRO_GENDER"] . '</td>
                     <td>' . $row["PRO_SEASON"] . '</td>
                     <td>' . $status . '</td>
-                    <td><a href="edit.product.php?id='.$row["PRO_ID"].'" class="btn btn-success reset-underline">Sửa</a></td>
-                    <td><button type="button"  name="action" data-pro_id="' . $row["PRO_ID"] . '"    data-pro_status="' . $row["PRO_STATUS"] . '"  class="action btn btn-danger reset-underline">Ẩn/Hiện</button></td>    
+                    <td><a href="edit.product.php?id='.$row["PRO_ID"].'" class="btn btn-success reset-underline">EDIT</a></td>
+                    <td><button type="button"  name="action" data-pro_id="' . $row["PRO_ID"] . '"    data-pro_status="' . $row["PRO_STATUS"] . '"  class="action btn btn-danger reset-underline">ACTION</button></td>    
                  </tr>                                   
                </form>
             </tbody>

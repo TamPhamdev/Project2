@@ -91,21 +91,21 @@ include_once '../../../assets/common/connect.php';
                                             <h3 class="text-center">Edit account admin</h3>
                                             <form action="updateDB.account.php" class="container" method="POST" style="width:100%;">
                                                 <div class="form-group row">
-                                                    <label for="inputEmail3" class="col-sm-6 col-form-label">Enter new username</label>
+                                                    <label for="inputEmail3" class="col-sm-6 col-form-label">Username</label>
                                                     <div class="col-sm-6">
-                                                        <input  class="form-control" type="text" name="username" required  minlength="6" value="<?php echo $row['ACC_NAME']?>">
+                                                        <input  class="form-control" type="text" disabled style="cursor: not-allowed;" name="username" required  minlength="6" value="<?php echo $row['ACC_NAME']?>">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="inputEmail3" class="col-sm-6 col-form-label">Enter new password</label>
                                                     <div class="col-sm-6">
-                                                        <input  class="form-control" type="password" name="newPassword" required minlength="6""><br>
+                                                        <input  class="form-control" type="password" name="newPassword" required minlength="6"title="MẬT KHẨU ÍT NHẤT 6 KÍ TỰ"  ><br>
                                                     </div>
                                                 </div>
                                                  <div class="form-group row">
                                                     <label for="inputEmail3" class="col-sm-6 col-form-label">Confirm new password</label>
                                                     <div class="col-sm-6">
-                                                        <input  class="form-control" type="password" name="confirmPassword" required minlength="6" ><br>
+                                                        <input  class="form-control" type="password" name="confirmPassword" required minlength="6"title="MẬT KHẨU ÍT NHẤT 6 KÍ TỰ" ><br>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">

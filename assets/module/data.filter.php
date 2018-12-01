@@ -29,7 +29,7 @@ error_reporting(E_ALL & ~E_NOTICE & ~8192);
 //                . " ORDER BY PRO_ID  DESC $start_from, $record_per_page"; 
  $query = "SELECT *"
                 . " FROM product, category"
-                . " WHERE product.CATE_ID = category.CATE_ID AND PRO_STATUS = 'Active'";
+                . " WHERE product.CATE_ID = category.CATE_ID AND PRO_STATUS  = 'Active' AND CATE_STATUS = 'Active'";
                      
     
 if(isset($_POST["search_text"]))
@@ -37,7 +37,7 @@ if(isset($_POST["search_text"]))
     $query = "SELECT *"
                 . " FROM product, category"
                 . " WHERE PRO_NAME  LIKE '%".$_POST["search_text"]."%' "
-            . "AND product.CATE_ID = category.CATE_ID AND PRO_STATUS = 'Active'";
+            . "AND product.CATE_ID = category.CATE_ID AND PRO_STATUS = 'Active' AND CATE_STATUS = 'Active'";
 }    
 //echo $query;
  // filter price
@@ -96,7 +96,7 @@ if(isset($_POST["search_text"]))
  $output .= '<br /><div style="position:absoulute; bottom:0px; left:0px; display:flex;">';  
  $page_query = "SELECT PRO_ID, PRO_IMG, PRO_NAME, PRO_PRICE, CATE_NAME, PRO_DESCRIPTION,PRO_SEASON,PRO_GENDER"
                 . " FROM product, category"
-                . " WHERE product.CATE_ID = category.CATE_ID AND PRO_STATUS = 'Active'";
+                . " WHERE product.CATE_ID = category.CATE_ID AND PRO_STATUS = 'Active' AND CATE_STATUS = 'Active'";
           //      . " ORDER BY PRO_ID  DESC ";  
  //echo $page_query;
  

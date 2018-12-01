@@ -5,7 +5,7 @@ include_once '../../../assets/common/connect.php';
 //    echo '<h4> Connected</h4>';
 //}
 
-$sql = "SELECT * FROM news";
+$sql = "SELECT * FROM news ORDER BY NEWS_DATE DESC";
       
 //echo $sql;
 $result = mysqli_query($cn, $sql);

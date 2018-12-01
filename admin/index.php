@@ -34,10 +34,8 @@
                     <ul class="navbar-nav">
                         <li class="nav-item active">
                             <a class="nav-link" href="module/account/account.php"> <i class="fas fa-user-secret"></i>
-                                <?php echo $_SESSION["role"] ?>
-                                 <?php echo $_SESSION["permission"] ?>
                                <?php  
-                echo '<span>Welcome - '.$_SESSION["username"].'</span>'; ?> 
+                echo '<span style="text-transform: uppercase;">Welcome - '.$_SESSION["username"].'</span>'; ?> 
                                 <span class="sr-only"></span>
                             </a>
                         </li>
@@ -59,13 +57,13 @@
                                             class="fas fa-box"></i>Product</a></li>
                                 <li class="item-dashboard"><a href="./module/category/admin.category.php" class="reset-underline"><i
                                             class="fas fa-clipboard-list"></i>Categories</a></li>
-                                <li class="item-dashboard"><a href="./module/order/admin.order.html" class="reset-underline"><i class="fas fa-dolly"></i>Order</a></li>
-                                <li class="item-dashboard"><a href="./module/customer/admin.customer.html" class="reset-underline"><i
+                                <li class="item-dashboard"><a href="./module/order/admin.order.php" class="reset-underline"><i class="fas fa-dolly"></i>Order</a></li>
+                                <li class="item-dashboard"><a href="./module/customer/admin.customer.php" class="reset-underline"><i
                                             class="fas fa-user-friends"></i>Customer</a></li>
                                 <li class="item-dashboard"><a href="./module/news/admin.news.php" class="reset-underline"><i class="far fa-bell"></i>News</a></li>
-                                <li class="item-dashboard"><a href="./module/feedback/admin.feedback.html" class="reset-underline"><i
+                                <li class="item-dashboard"><a href="./module/feedback/admin.feedback.php" class="reset-underline"><i
                                             class="far fa-envelope"></i>Feedback</a></li>
-                                <li class="item-dashboard"><a href="./module/comment/admin.comment.html" class="reset-underline"><i
+                                <li class="item-dashboard"><a href="./module/comment/admin.comment.php" class="reset-underline"><i
                                             class="far fa-edit"></i>Comment</a></li>
                             </ul>
                         </div>

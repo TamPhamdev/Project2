@@ -59,7 +59,7 @@ include_once '../common/connect.php';
                         <h2 style="font-family: 'Montserrat';font-weight: 700" ;>Shop</h2>
                     </div>
                     <div class="col-md-4 title-bar mr-auto">
-                        <span class="home-item"><a href="../../index.html">Home</a></span>
+                        <span class="home-item"><a href="../../index.php">Home</a></span>
                         <span class="separator">></span>
                         <span class="current-item">Products</span>
                     </div>
@@ -102,7 +102,7 @@ include_once '../common/connect.php';
                             <?php
                             $query = "SELECT DISTINCT CATE_NAME"
                              . " FROM category"
-                            // . " WHERE product.CATE_ID = category.CATE_ID"
+                            . " WHERE CATE_STATUS = 'Active'"
                              . " ORDER BY CATE_ID  DESC ";
                             $statement = $connect->prepare($query);
                             $statement->execute();
@@ -121,8 +121,8 @@ include_once '../common/connect.php';
                                
                                     <?php
                             $query = "SELECT PRO_ID, PRO_NAME, PRO_PRICE, PRO_IMG"
-                             . " FROM product WHERE PRO_STATUS ='Active' LIMIT 4";
-                            // . " WHERE product.CATE_ID = category.CATE_ID"
+                             . " FROM product, category WHERE PRO_STATUS ='Active' AND CATE_STATUS = 'Active'"
+                             . " AND product.CATE_ID = category.CATE_ID LIMIT 4";
                            
                             $stm = $connect->prepare($query);
                             $stm->execute();

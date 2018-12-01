@@ -1,4 +1,11 @@
 <?php
+session_start();
+if ($_SESSION["permission"] != 'Product' && $_SESSION["permission"]!= 'All') {
+    echo "<script>alert('BẠN KHÔNG ĐỦ QUYỀN TRUY CẬP TRANG NÀY. VUI LÒNG LIÊN HỆ ADMIN ĐỂ BIẾT THÊM CHI TIẾT');window.location.href = '../../index.php';</script>";
+    exit();
+}
+?>
+<?php
 include_once '../../../assets/common/connect.php';
 if (isset($_POST["create"])) {
     $name = $_POST['proName'];
@@ -12,14 +19,24 @@ if (isset($_POST["create"])) {
     $sql = ("INSERT INTO product(PRO_IMG, PRO_NAME, PRO_PRICE, PRO_DESCRIPTION, CATE_ID, PRO_GENDER,PRO_SEASON) VALUES "
             . "('$image','$name','$price','$description',(SELECT CATE_ID FROM category WHERE CATE_NAME ='$category'),'$gender', '$season')");
     $sql2 = ("INSERT INTO category (CATE_NAME) VALUES ('$category')");
-    mysqli_query($cn, $sql2);
-    mysqli_query($cn, $sql);
+    $dup = mysqli_query($cn,"SELECT PRO_NAME FROM product WHERE PRO_NAME='".$_POST['proName']."'");
+     if(mysqli_num_rows($dup) > 0)
+    {
+            echo "<script>alert('Tên sản phẩm đã được sử dụng. Vui lòng chọn tên khác');indow.location.href = 'create.product.php';</script>";
+    }
+    else 
+    {
+        mysqli_query($cn, $sql2);
+        mysqli_query($cn, $sql);
+        echo "<script>alert('THÊM SẢN PHẨM MỚI THÀNH CÔNG !!!');window.location.href = 'admin.product.php';</script>"; 
+    }
+   
 //     echo $sql;
 //     echo $sql2;
 
-    if (mysqli_affected_rows($cn) > 0) {
-        header("location:admin.product.php");
-    } 
+//    if (mysqli_affected_rows($cn) > 0) {
+//        header("location:admin.product.php");
+//    } 
 //    else {
 //        echo "unsuccesful";
 //    }
@@ -53,7 +70,8 @@ if (isset($_POST["create"])) {
                 <div class="collapse navbar-collapse justify-content-end" id="navbarTogglerDemo02">
                     <ul class="navbar-nav">
                         <li class="nav-item active">
-                            <a class="nav-link" href="../../module/account/account.php"> <i class="fas fa-user-secret"></i>Admin <span
+                            <a class="nav-link" href="../../module/account/account.php"> <i class="fas fa-user-secret"></i> <?php  
+                echo '<span style="text-transform: uppercase;">Welcome - '.$_SESSION["username"].'</span>'; ?>  <span
                                     class="sr-only"></span></a>
                         </li>
                         <li class="nav-item"><a class="nav-link " href="../../logout.php">Logout</a></li>
@@ -93,7 +111,7 @@ if (isset($_POST["create"])) {
                                             <div class="create-product text-left mx-auto d-flex justify-content-between">
                                                 <form action="" method="POST" style="width:100%;" >
                                                     <label for="nameProduct">Tên sản phẩm</label>
-                                                    <input type="text" id="nameProduct" required style="margin-left:60px;" name="proName"><br>
+                                                    <input type="text" id="nameProduct" required  pattern="^[_A-z0-9]*((-|\s)*[_A-z0-9]){6,240}$" title="CHỮ KHÔNG DẤU, ÍT NHẤT 6 KÍ TỰ" style="margin-left:60px;" name="proName"><br>
                                                     <label for="priceProduct">Giá cả</label>
                                                     <input type="number"  pattern="0+\.[0-9]*[1-9][0-9]*$" min="0" onkeypress="return event.charCode >= 48 && event.charCode <= 57"
                                                            style="margin-left:114px;" id="priceProduct" name="proPrice" required ><br>
@@ -117,9 +135,11 @@ if (isset($_POST["create"])) {
                                                         <option value="Spring">Spring</option>
                                                     </select><br>
                                                     <label for="descriptionProduct">Mô tả</label>
-                                                    <input type="text" id="descriptionProduct" name="proDescription" required  style="margin-left: 114px;"> <br>
+                                                    <input type="text" id="descriptionProduct" pattern="^[_A-z0-9]*((-|\s)*[_A-z0-9]){6,240}$" title="CHỮ KHÔNG DẤU, ÍT NHẤT 6 KÍ TỰ" 
+                                                           name="proDescription" required  style="margin-left: 114px;"> <br>
                                                     <label for="imgProdct">Hình ảnh</label>
-                                                    <input type="text"  id="inputGroupFile" name="proImg" style="margin-left:90px;">
+                                                    <input type="text" pattern="^((http[s]?|ftp):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.*)?(#[\w\-]+)?$"  
+                                                           id="inputGroupFile" name="proImg" style="margin-left:90px;" title="NHẬP ĐÚNG ĐỊNH DẠNG URL HÌNH ẢNH">
                                                     <br>
                                                     <div class="comfirm text-center">
                                                         <button type="submit" class="btn btn-success" name="create" style="margin: 0 40px;">Xác nhận</button>

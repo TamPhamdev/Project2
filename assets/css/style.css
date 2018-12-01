@@ -329,7 +329,6 @@ li.nav-item>a.nav-link:active {
 .parent:hover .child,
 .parent:focus .child {
   transform: scale(1.2);
-  cursor: default;
 }
 
 .child::before {

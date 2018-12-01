@@ -14,11 +14,17 @@ if (isset($_POST["submit"])) {
     $category = $_POST['newCate'];
 
     $sql = ("INSERT INTO category (CATE_NAME) VALUES ('$category')");
-    mysqli_query($cn, $sql);
-
-    if (mysqli_affected_rows($cn) === 0) {
-        echo "Unsuccesful";
+    $dup = mysqli_query($cn,"SELECT CATE_NAME FROM category WHERE CATE_NAME='".$_POST['newCate']."'");
+   
+    if(mysqli_num_rows($dup) > 0)
+    {
+            echo "<script>alert('Tên category đã được sử dụng. Vui lòng chọn tên khác')</script>";
     }
+    else if(mysqli_query($cn, $sql) ) 
+    {
+       echo "<script>alert('THÊM TÀI KHOẢN MỚI THÀNH CÔNG !!!');window.location.href = 'admin.category.php';</script>"; 
+    }
+    
 }
 ?>
 
@@ -47,7 +53,8 @@ if (isset($_POST["submit"])) {
                 <div class="collapse navbar-collapse justify-content-end" id="navbarTogglerDemo02">
                     <ul class="navbar-nav">
                         <li class="nav-item active">
-                            <a class="nav-link" href="../../module/account/account.php"> <i class="fas fa-user-secret"></i>Admin <span
+                            <a class="nav-link" href="../../module/account/account.php"> <i class="fas fa-user-secret"></i><?php  
+                echo '<span style="text-transform: uppercase;">Welcome - '.$_SESSION["username"].'</span>'; ?> <span
                                     class="sr-only"></span></a>
                         </li>
                         <li class="nav-item"><a class="nav-link " href="../../logout.php">Logout</a></li>
@@ -68,13 +75,13 @@ if (isset($_POST["submit"])) {
                                             class="fas fa-box"></i>Product</a></li>
                                 <li class="item-dashboard"><a href="../../module/category/admin.category.php" class="reset-underline" style='color: #f5614d;'><i
                                             class="fas fa-clipboard-list"></i>Categories</a></li>
-                                <li class="item-dashboard"><a href="../../module/order/admin.order.html" class="reset-underline"><i class="fas fa-dolly"></i>Order</a></li>
-                                <li class="item-dashboard"><a href="../../module/customer/admin.customer.html" class="reset-underline"><i
+                                <li class="item-dashboard"><a href="../../module/order/admin.order.php" class="reset-underline"><i class="fas fa-dolly"></i>Order</a></li>
+                                <li class="item-dashboard"><a href="../../module/customer/admin.customer.php" class="reset-underline"><i
                                             class="fas fa-user-friends"></i>Customer</a></li>
                                 <li class="item-dashboard"><a href="../../module/news/admin.news.php" class="reset-underline"><i class="far fa-bell"></i>News</a></li>
-                                <li class="item-dashboard"><a href="../../module/feedback/admin.feedback.html" class="reset-underline"><i
+                                <li class="item-dashboard"><a href="../../module/feedback/admin.feedback.php" class="reset-underline"><i
                                             class="far fa-envelope"></i>Feedback</a></li>
-                                <li class="item-dashboard"><a href="../../module/comment/admin.comment.html" class="reset-underline"><i
+                                <li class="item-dashboard"><a href="../../module/comment/admin.comment.php" class="reset-underline"><i
                                             class="far fa-edit"></i>Comment</a></li>
                             </ul>
                         </div>
@@ -85,6 +92,7 @@ if (isset($_POST["submit"])) {
                                         <div class="col-md-8 col-sm-8 mx-auto">
                                             <h3 class="text-center">Add new category</h3>
                                             <div class="create-product text-center mx-auto">
+                                                 
                                                 <form action="" method="POST">
                                                     <div class="form-group row mb-4 mt-4">
                                                     <label for="inputEmail3" class="col-sm-6 col-form-label">Enter new category</label>
@@ -96,11 +104,9 @@ if (isset($_POST["submit"])) {
                                                         <button type="submit" name="submit" class="btn btn-success " style="margin: 0 40px;">Confirm</button>
                                                     </div><br>
 
-
-                                                </form>
-                                                <table class="table text-left" id="data">
-                                                    <!--data ajax here -->
-                                                </table>
+                                        <span id="message" style="float:right;"></span>
+                                                </form> 
+                                                <div id="cate_data" style="margin-top: 50px;"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -112,7 +118,7 @@ if (isset($_POST["submit"])) {
             </div>
         </div>
 
-        <script>
+<!--        <script>
             // call ajax
             var ajax = new XMLHttpRequest();
             var method = "POST";
@@ -141,7 +147,7 @@ if (isset($_POST["submit"])) {
                                    </tr>
                                    <tr>
                                      <th scope="row">${id}</th>
-                                     <th>${cate}</th>
+                                     <th class="text-muted">${cate}</th>
                                      <th> <a href="edit.category.php?id=${id}" class="btn btn-success">Edit</a>
                                        <a href="delete.category.php?id=${id}" class="btn btn-danger">Delete</a></th>
                                    </tr>
@@ -150,12 +156,59 @@ if (isset($_POST["submit"])) {
                     document.getElementById("data").innerHTML = html;
                 }
             }
-        </script>    
+        </script>    -->
 
 
 
 
         <script src="../../../assets/js/jquery-3.3.1.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+
+                load_user_data();
+
+                function load_user_data()
+                {
+                    var action = 'fetch';
+                    $.ajax({
+                        url: 'action.php',
+                        method: 'POST',
+                        data: {action: action},
+                        success: function (data)
+                        {
+                            $('#cate_data').html(data);
+                        }
+                    });
+                }
+
+                $(document).on('click', '.action', function () {
+                    var pro_id = $(this).data('pro_id');
+                    var pro_status = $(this).data('pro_status');
+                    var action = 'change_status';
+                    $('#message').html('');
+                    if (confirm("BẠN CÓ MUỐN THAY ĐỔI TRẠNG THÁI CỦA CATEGORY?"))
+                    {
+                        $.ajax({
+                            url: 'action.php',
+                            method: 'POST',
+                            data: {pro_id: pro_id, pro_status: pro_status, action: action},
+                            success: function (data)
+                            {
+                                if (data != '')
+                                {
+                                    load_user_data();
+                                    $('#message').html(data);
+                                }
+                            }
+                        });
+                    } else
+                    {
+                        return false;
+                    }
+                });
+
+            });
+        </script>
         <script src="../../../assets/js/popper.min.js"></script>
         <script src="../../../assets/js/bootstrap.min.js"></script>
     </body>

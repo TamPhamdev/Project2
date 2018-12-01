@@ -502,12 +502,7 @@ div.product-title>h1 {
   color: #3f3f3f;
 }
 
-div.categories>a {
-  text-decoration: none;
-  text-transform: uppercase;
-  font: 400 14px/22px "Raleway";
-  color: #8d8d8d;
-}
+
 .categories {
     margin: 40px 0;
    display: flex;

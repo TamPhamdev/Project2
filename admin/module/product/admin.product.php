@@ -53,7 +53,9 @@ include_once '../../../assets/common/connect.php';
                 <div class="collapse navbar-collapse justify-content-end" id="navbarTogglerDemo02">
                     <ul class="navbar-nav">
                         <li class="nav-item active">
-                            <a class="nav-link" href="../../module/account/account.html"> <i class="fas fa-user-secret"></i>Admin <span
+                            <a class="nav-link" href="../../module/account/account.php"> <i class="fas fa-user-secret"></i>
+                               <?php  
+                echo '<span style="text-transform: uppercase;">Welcome - '.$_SESSION["username"].'</span>'; ?>  <span
                                     class="sr-only"></span></a>
                         </li>
                         <li class="nav-item"><a class="nav-link " href="../../logout.php">Logout</a></li>
@@ -69,18 +71,18 @@ include_once '../../../assets/common/connect.php';
                         <div class="col-md-2 col-sm-3" style="background-color: #263544;">
                             <ul>
                                 <li  style="font-size:30px; padding: 20px 0;" class="item-dashboard"><a  href="../../index.php" class="reset-underline">Introduction</a></li>
-                                <li  style="font-size:25px; padding-bottom: 20px;" class="item-dashboard"><a href="../../module/account/account.html" class="reset-underline"><i class="fas fa-user-secret"></i>Admin</a></li>
+                                <li  style="font-size:25px; padding-bottom: 20px;" class="item-dashboard"><a href="../../module/account/account.php" class="reset-underline"><i class="fas fa-user-secret"></i>Admin</a></li>
                                 <li style="font-size:25px; padding-bottom: 20px;" class="item-dashboard"><a href="../../module/product/admin.product.php" class="reset-underline" style='color: #f5614d;'><i
                                             class="fas fa-box"></i>Product</a></li>
                                 <li style="font-size:25px; padding-bottom: 20px;" class="item-dashboard"><a href="../../module/category/admin.category.php" class="reset-underline"><i
                                             class="fas fa-clipboard-list"></i>Categories</a></li>
-                                <li style="font-size:25px; padding-bottom: 20px;" class="item-dashboard"><a href="../../module/order/admin.order.html" class="reset-underline"><i class="fas fa-dolly"></i>Order</a></li>
-                                <li style="font-size:25px; padding-bottom: 20px;" class="item-dashboard"><a href="../../module/customer/admin.customer.html" class="reset-underline"><i
+                                <li style="font-size:25px; padding-bottom: 20px;" class="item-dashboard"><a href="../../module/order/admin.order.php" class="reset-underline"><i class="fas fa-dolly"></i>Order</a></li>
+                                <li style="font-size:25px; padding-bottom: 20px;" class="item-dashboard"><a href="../../module/customer/admin.customer.php" class="reset-underline"><i
                                             class="fas fa-user-friends"></i>Customer</a></li>
                                 <li style="font-size:25px; padding-bottom: 20px;" class="item-dashboard"><a href="../../module/news/admin.news.php" class="reset-underline"><i class="far fa-bell"></i>News</a></li>
-                                <li style="font-size:25px; padding-bottom: 20px;" class="item-dashboard"><a href="../../module/feedback/admin.feedback.html" class="reset-underline"><i
+                                <li style="font-size:25px; padding-bottom: 20px;" class="item-dashboard"><a href="../../module/feedback/admin.feedback.php" class="reset-underline"><i
                                             class="far fa-envelope"></i>Feedback</a></li>
-                                <li style="font-size:25px; padding-bottom: 20px;" class="item-dashboard"><a href="../../module/comment/admin.comment.html" class="reset-underline"><i
+                                <li style="font-size:25px; padding-bottom: 20px;" class="item-dashboard"><a href="../../module/comment/admin.comment.php" class="reset-underline"><i
                                             class="far fa-edit"></i>Comment</a></li>
                             </ul>
                         </div>
@@ -104,70 +106,7 @@ include_once '../../../assets/common/connect.php';
             </div>
         </div>
 
-<!--        <script>
-            // call ajax
-            var ajax = new XMLHttpRequest();
-            var method = "GET";
-            var url = "../../../assets/common/display.php";
-            var asynchronous = true;
-            ajax.open(method, url, asynchronous);
-            // send ajax request
-            ajax.send();
-            // receiving  response from data.php
-            ajax.onreadystatechange = function ()
-            {
-                if (this.readyState == 4 && this.status == 200)
-                {
-                    var data = JSON.parse(this.responseText);
-                    var html = "";
-                    for (var i = 0; i < data.length; i++)
-                    {
-                        var id = data[i].PRO_ID;
-                        var img = data[i].PRO_IMG;
-                        var name = data[i].PRO_NAME;
-                        var price = data[i].PRO_PRICE;
-                        var cate = data[i].CATE_NAME;
-                        var description = data[i].PRO_DESCRIPTION;
-                        var season = data[i].PRO_SEASON;
-                        var gender = data[i].PRO_GENDER;
 
-                        html += `                       <tr>
-                                                        <td scope="row">${id}</td>
-                                                        <td><img src="${img}" style="width:75px; height: 75px;"></td>
-                                                        <td>${name}</td>
-                                                        <td>${price}</td>
-                                                        <td>${cate}</td>
-                                                        <td>${description}</td>
-                                                        <td>${gender}</td>
-                                                        <td>${season}</td>
-                                                        <td><span id="btnStatus" class="label btn-primary reset-underline">Hiển thị</span></td>
-                                                        <td><a href="edit.product.php?id=${id}" class="btn btn-success reset-underline">Sửa</a></td>
-                                                        <td><a href="delete.product.php?id=${id}" name="deleteProduct" id="delete" class="btn btn-danger reset-underline">Xóa</a></td>    
-                                                        </tr> 
-                                                                        
-                                                `
-                    }
-                    document.getElementById("data").innerHTML = html;
-                    
-                }
-            }
-            window.onload = function () {
-                const btn = document.querySelectorAll('.btn-danger');
-                for (var i = 0; i < btn.length; i++) {
-                    btn[i].addEventListener('click', isChange);
-                     
-                }
-                function isChange(e) {
-                    let btnStatus = document.querySelectorAll('.btn-primary');
-                    let target = e.target.parentElement.previousElementSibling.previousElementSibling;
-                    console.log(target.firstChild);
-                    if (confirm('Are u sure?')) {
-                        target.firstChild.classList.add('disabled', 'btn-secondary');
-                    }
-                  //  e.preventDefault();
-                }
-            }
-        </script>    -->
         <script type="text/javascript">
             $(document).ready(function () {
 

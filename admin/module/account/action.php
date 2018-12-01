@@ -37,9 +37,9 @@ if (isset($_POST["action"])) {
                     <td>'.$row["ACC_NAME"].'</td>
                     <td>'.$row["ACC_PER"].'</td>   
                      <td>' . $status . '</td>    
-                    <td><a href="edit.account.php?id='.$row["ACC_ID"].'" class="btn btn-success reset-underline">Sửa</a></td>
-                    <td><button type="button"  name="action" data-pro_id="' . $row["ACC_ID"] . '"   class="delete btn btn-danger reset-underline">Xóa</button></td>
-                    <td><button type="button"  name="action" data-pro_id="' . $row["ACC_ID"] . '"    data-pro_status="' . $row["ACC_TYPE"] . '"  class="action btn btn-danger reset-underline">Ẩn/Hiện</button></td>   
+                    <td><a href="edit.account.php?id='.$row["ACC_ID"].'" class="btn btn-success reset-underline">EDIT</a></td>
+                    <td><button type="button"  name="action" data-pro_id="' . $row["ACC_ID"] . '"   class="delete btn btn-danger reset-underline">DELETE</button></td>
+                    <td><button type="button"  name="action" data-pro_id="' . $row["ACC_ID"] . '"    data-pro_status="' . $row["ACC_TYPE"] . '"  class="action btn btn-danger reset-underline">ACTION</button></td>   
                 </tr>
             </tbody>
                     ';

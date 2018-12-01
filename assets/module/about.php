@@ -18,40 +18,31 @@
 <body>
   <div class="header">
     <!--Header start-->
-    <nav class="navbar main-nav sticky-top navbar-expand-md navbar-expand-sm" id="nav">
-      <!--Navbar start-->
-      <a class="navbar-brand" href="../../index.html">AHIHI SHOP</a>
-      <button class="navbar-toggler  navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
-        aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon icon-bar"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-end" id="navbarTogglerDemo02">
-        <ul class="navbar-nav">
-          <li class="nav-item active">
-            <a class="nav-link" href="../../index.html">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" aria-haspopup="true"
-              aria-expanded="false">
-              Shop
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="product-detail.html">Clothes</a>
-              <a class="dropdown-item" href="product-detail.html">Shoes</a>
-              <a class="dropdown-item" href="product-detail.html">Something else here</a>
-            </div>
-          </li>
-          <li class="nav-item"><a class="nav-link" href="">About</a></li>
-          <!-- ul here -->
-          <li class="nav-item"><a class="nav-link" href="cart.html"><i class="fas fa-shopping-bag"></i></a></li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <i class="fas fa-search " aria-hidden="true"></i>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </nav>
+     <nav class="navbar main-nav sticky-top navbar-expand-md navbar-expand-sm" id="nav">
+                <!--Navbar start-->
+                <a class="navbar-brand" href="../../index.php">AHIHI SHOP</a>
+                <button class="navbar-toggler  navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+                        aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon icon-bar"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarTogglerDemo02">
+                    <ul class="navbar-nav">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="../../index.php">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="product.php" id="navbarDropdown" role="button" aria-haspopup="true"
+                               aria-expanded="false">
+                                Shop
+                            </a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link " href="news.php">News</a></li>
+                        <li class="nav-item"><a class="nav-link " href="about.php">About</a></li>
+                        <!-- ul here -->
+                        <li class="nav-item"><a class="nav-link" href="cart.php"><i class="fas fa-shopping-bag"></i></a></li>
+                    </ul>
+                </div>
+            </nav>
   </div>
   <!--Navbar End-->
 
@@ -64,7 +55,7 @@
           <h2 style="font-family: 'Montserrat';font-weight: 700" ;>About</h2>
         </div>
         <div class="col-md-4 title-bar mr-auto">
-          <span class="home-item"><a href="../../index.html">Home</a></span>
+          <span class="home-item"><a href="../../index.php">Home</a></span>
           <span class="separator">></span>
           <span class="current-item">About</span>
         </div>
@@ -80,15 +71,32 @@
             <form action="">
               <h4>Feedback</h4>
               <label for="">Name</label>
-              <input type="text" required>
+              <input type="text" name="txtName" required>
               <label for="">Email</label>
-              <input type="email" required>
-              <label for="">Phone number</label>
-              <input type="text" required><br>
+              <input type="email" name="txtEmail" required>
+              <label for="">Title</label>
+              <input type="text" name="txtTitle" required><br>
               <label for="">Content</label>
-              <input type="text" style="height:100px;">
-              <button class="btn btn-success mt-md-5">Send</button>
+              <input type="text" name="txtContent" style="height:100px;">
+              <button class="btn btn-success mt-md-5" name="btnSend">Send</button>
             </form>
+            <?php
+            include_once "../common/connect.php";
+            if (isset($_GET["btnSend"])) {
+                $FEEDBACK_NAME = $_GET["txtName"];
+                $FEEDBACK_EMAIL = $_GET["txtEmail"];
+                $FEEDBACK_TITLE = $_GET["txtTitle"];
+                $FEEDBACK_CONTENT = $_GET["txtContent"];
+                               
+                if (isset($_GET["txtName"]) and isset($_GET["txtEmail"]) and isset($_GET["txtTitle"]) and isset($_GET["txtContent"])
+                    and !empty($_GET["txtName"]) and !empty("txtEmail") and !empty("txtTitle") and !empty("txtContent"))
+                {
+                    $sql = "insert into Feedback(FEEDBACK_TITLE, FEEDBACK_CONTENT, CUS_ID, FEEDBACK_STATUS, FEEDBACK_NAME, FEEDBACK_EMAIL) value"
+                            . " ('$FEEDBACK_TITLE','$FEEDBACK_CONTENT',(select CUS_ID from Customer where CUS_EMAIL ='$FEEDBACK_EMAIL'),'0','$FEEDBACK_NAME','$FEEDBACK_EMAIL')";
+                    mysqli_query($cn, $sql);                 
+                }                                                      
+            }
+        ?>
         </div>
       </div>
     </div>

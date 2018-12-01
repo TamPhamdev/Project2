@@ -1,4 +1,13 @@
 <?php
+session_start();
+ if($_SESSION["permission"] != 'News' && $_SESSION["permission"]!= 'All')  
+ {  
+      echo "<script>alert('BẠN KHÔNG ĐỦ QUYỀN TRUY CẬP TRANG NÀY. VUI LÒNG LIÊN HỆ ADMIN ĐỂ BIẾT THÊM CHI TIẾT');window.location.href = '../../index.php';</script>";
+                  exit();
+ } 
+
+?>
+<?php
 require_once '../../../assets/common/connect.php';
 $newsID = "";
 if (isset($_GET["id"])) {
@@ -41,7 +50,8 @@ $row = mysqli_fetch_array($rs);
                 <div class="collapse navbar-collapse justify-content-end" id="navbarTogglerDemo02">
                     <ul class="navbar-nav">
                         <li class="nav-item active">
-                            <a class="nav-link" href="../../module/account/account.html"> <i class="fas fa-user-secret"></i>Admin <span
+                            <a class="nav-link" href="../../module/account/account.php"> <i class="fas fa-user-secret"></i><?php  
+                echo '<span style="text-transform: uppercase;">Welcome - '.$_SESSION["username"].'</span>'; ?> <span
                                     class="sr-only"></span></a>
                         </li>
                         <li class="nav-item"><a class="nav-link " href="../../logout.php">Logout</a></li>
@@ -57,18 +67,18 @@ $row = mysqli_fetch_array($rs);
                         <div class="col-md-3 col-sm-3 sidebar-left mx-auto">
                             <ul>
                                 <li class="item-dashboard"><a href="../../index.php" class="reset-underline">Introduction</a></li>
-                                <li class="item-dashboard"><a href="../../module/account/account.html" class="reset-underline"><i class="fas fa-user-secret"></i>Admin</a></li>
+                                <li class="item-dashboard"><a href="../../module/account/account.php" class="reset-underline"><i class="fas fa-user-secret"></i>Admin</a></li>
                                 <li class="item-dashboard"><a href="../../module/product/admin.product.php" class="reset-underline"><i
                                             class="fas fa-box"></i>Product</a></li>
                                 <li class="item-dashboard"><a href="../../module/category/admin.category.php" class="reset-underline"><i
                                             class="fas fa-clipboard-list"></i>Categories</a></li>
-                                <li class="item-dashboard"><a href="../../module/order/admin.order.html" class="reset-underline"><i class="fas fa-dolly"></i>Order</a></li>
-                                <li class="item-dashboard"><a href="../../module/customer/admin.customer.html" class="reset-underline"><i
+                                <li class="item-dashboard"><a href="../../module/order/admin.order.php" class="reset-underline"><i class="fas fa-dolly"></i>Order</a></li>
+                                <li class="item-dashboard"><a href="../../module/customer/admin.customer.php" class="reset-underline"><i
                                             class="fas fa-user-friends"></i>Customer</a></li>
                                 <li class="item-dashboard"><a href="../../module/news/admin.news.php" class="reset-underline" style='color: #f5614d;'><i class="far fa-bell"></i>News</a></li>
-                                <li class="item-dashboard"><a href="../../module/feedback/admin.feedback.html" class="reset-underline"><i
+                                <li class="item-dashboard"><a href="../../module/feedback/admin.feedback.php" class="reset-underline"><i
                                             class="far fa-envelope"></i>Feedback</a></li>
-                                <li class="item-dashboard"><a href="../../module/comment/admin.comment.html" class="reset-underline"><i
+                                <li class="item-dashboard"><a href="../../module/comment/admin.comment.php" class="reset-underline"><i
                                             class="far fa-edit"></i>Comment</a></li>
                             </ul>
                         </div>
@@ -83,19 +93,24 @@ $row = mysqli_fetch_array($rs);
                                                     <div class="form-group row">
                                                         <label for="inputEmail3" class="col-sm-2 col-form-label">Title</label>
                                                         <div class="col-sm-10">
-                                                            <input  class="form-control" type="text" name="newsTitle" required value="<?php echo $row[1] ?>"><br>
+                                                            <input  class="form-control"  pattern="^[_A-z0-9]*((-|\s)*[_A-z0-9]){6,100}$" title="CHỮ KHÔNG DẤU, ÍT NHẤT 6 KÍ TỰ Tối đa 100 kí tự" 
+                                                              type="text" name="newsTitle" required value="<?php echo $row[1] ?>"><br>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <label for="inputPassword3" class="col-sm-2 col-form-label">Content</label>
                                                         <div class="col-sm-10">
-                                                            <textarea class="form-control" name="newsContent" value="<?php echo $row[2] ?>"  rows="5" style="" required><?php echo $row[2] ?></textarea><br>
+                                                            <textarea class="form-control" name="newsContent"
+                                                             pattern="^[_A-z0-9]*((-|\s)*[_A-z0-9]){6,400}$" title="CHỮ KHÔNG DẤU, ÍT NHẤT 6 KÍ TỰ Tối đa 500 kí tự"          
+                                                             value="<?php echo $row[2] ?>"  style="height: 250px;" required><?php echo $row[2] ?></textarea><br>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <label for="inputPassword3" class="col-sm-2 col-form-label">Image</label>
                                                         <div class="col-sm-10">
-                                                            <input class="form-control" value="<?php echo $row[4] ?>" type="text" name="newsImg" style="">
+                                                            <input class="form-control"  pattern="^((http[s]?|ftp):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.*)?(#[\w\-]+)?$" 
+                                                             title="NHẬP ĐÚNG ĐỊNH DẠNG URL HÌNH ẢNH" 
+                                                            value="<?php echo $row[4] ?>" type="text" name="newsImg" style="">
                                                         </div>
                                                     </div>
                                                     <div class="comfirm text-center">
