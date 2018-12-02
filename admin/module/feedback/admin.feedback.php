@@ -13,7 +13,7 @@ include '../../../assets/common/permission.php';
 if ($cn == NULL) {
     exit();
 }
-$sql = "select * from Feedback;";
+$sql = "select * from Feedback ORDER BY FEEDBACK_ID DESC";
 
 $result = mysqli_query($cn, $sql);
 
@@ -106,7 +106,7 @@ $result = mysqli_query($cn, $sql);
                             echo "<td> </td>";
                             echo "<td>".$row["FEEDBACK_NAME"]. "</td>";
                             echo "<td>".$row["FEEDBACK_DATE"]. "</td>";                        
-                            echo '<td><a href="admin.feedback.detail.php?ID='.$row["FEEDBACK_ID"].'" class="btn btn-info reset-underline">Detail</a></td>';
+                            echo '<td><a href="admin.feedback.detail.php?ID='.$row["FEEDBACK_ID"].'" class="btn btn-success reset-underline">Detail</a></td>';
                             echo '<td><a href="DeleteFeedback.php?ID='.$row["FEEDBACK_ID"].'" class="btn btn-danger" onclick="return confirmDelete()">Delete</a></td>';
                             echo "<tr>";
                         }

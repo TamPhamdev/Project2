@@ -104,7 +104,7 @@ $result = mysqli_query($cn, $sql);
                                 echo "<td> </td>";
                                 echo "<td>".$row["COMMENT_NAME"]. "</td>";
                                 echo "<td>".$row["COMMENT_DATE"]. "</td>";                        
-                                echo '<td><a href="admin.comment.detail.php?ID='.$row["COMMENT_ID"].'" class="btn btn-info reset-underline">Detail</a></td>';
+                                echo '<td><a href="admin.comment.detail.php?ID='.$row["COMMENT_ID"].'" class="btn btn-success reset-underline">Detail</a></td>';
                                 echo '<td><a href="DeleteComment.php?ID='.$row["COMMENT_ID"].'" class="btn btn-danger" onclick="return confirmDelete()">Delete</a></td>';
                                 echo "<tr>";
                             }

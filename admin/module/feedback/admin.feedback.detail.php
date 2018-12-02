@@ -125,13 +125,29 @@ if($cn == NULL)
                             <td>Content</td>
                             <td><?php echo $row['FEEDBACK_CONTENT']; ?></td>
                           </tr>
-                          <tr>
-                            <td>Reply</td>
-                            <td><input type="text" style="height:100px; width: 100%;"></td>
-                          </tr>
+                         
                     </table>
-                    <button type="button" class="btn btn-info">Send</button>
-                    <button type="button" class="btn btn-danger" onclick="window.history.go(-1); return false;">Back</button>                    
+                    <form action="" method="POST">
+                        <label for="">Reply</label>
+                        <input type="text" name="txtReply" style="height:100px; width: 100%;" value="<?php echo "$row[8]";?>">
+                        <br>
+                        <br>
+                        <button name="btnSend" class="btn btn-success" >Send</button>
+                    </form> 
+                        <?php echo '<a href="admin.feedback.php" class="btn btn-danger">Back</a>' ?>                                   
+                    <?php
+                        if (isset($_POST["btnSend"])) {
+                        
+                            $FEEDBACK_REPLY = $_POST["txtReply"];
+                            if (isset($_POST["txtReply"]) and !empty("txtReply"))
+                            {   
+                                if ($row["CUS_ID"]>0) {
+                                $sql1 = "update Feedback set FEEDBACK_REPLY ='$FEEDBACK_REPLY' where FEEDBACK_ID='$pID'";
+                                mysqli_query($cn,$sql1); 
+                                }                                            
+                            }                                        
+                        }
+                    ?>
                   </div>
                 </div>
               </div>
