@@ -39,8 +39,15 @@
                         <li class="nav-item"><a class="nav-link " href="news.php">News</a></li>
                         <li class="nav-item"><a class="nav-link " href="about.php">About</a></li>
                         <!-- ul here -->
-                        <li class="nav-item"><a class="nav-link" href="cart.php"><i class="fas fa-shopping-bag"></i></a></li>
+                        <li class="nav-item"><a id="cart" class="nav-link" href="javascript:void(0);"><i class="fas fa-shopping-bag"></i></a></li>
                     </ul>
+                </div>
+                <div class="popup-cart" >
+                    <div class="list-cart">
+                        <div class="item-cart d-flex justify-content-between align-items-center">
+                                Your Cart is Empty!
+                        </div>         
+                    </div>
                 </div>
             </nav>
         </div>
@@ -139,6 +146,7 @@
 <script src="../js/jquery-3.3.1.min.js"></script>
 <script src="../js/popper.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
+<script src="../js/main.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         let nav = document.querySelector('#nav');

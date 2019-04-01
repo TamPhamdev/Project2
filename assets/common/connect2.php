@@ -1,5 +1,4 @@
 
-
 <?php
 
 $connect = new PDO('mysql:host=localhost;dbname=ahihishop', 'root', '');
@@ -13,5 +12,5 @@ if (mysqli_connect_error()) {
     die("Not connect");
 }
 
-
+mysqli_set_charset($cn, "utf8");
 ?>

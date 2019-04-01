@@ -3,7 +3,6 @@ session_start();
  if($_SESSION["permission"] != 'News' && $_SESSION["permission"]!= 'All')  
  {  
       echo "<script>alert('BẠN KHÔNG ĐỦ QUYỀN TRUY CẬP TRANG NÀY. VUI LÒNG LIÊN HỆ ADMIN ĐỂ BIẾT THÊM CHI TIẾT');window.location.href = '../../index.php';</script>";
-                  exit();
  } 
 
 ?>
@@ -110,11 +109,11 @@ $row = mysqli_fetch_array($rs);
                                                         <div class="col-sm-10">
                                                             <input class="form-control"  pattern="^((http[s]?|ftp):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.*)?(#[\w\-]+)?$" 
                                                              title="NHẬP ĐÚNG ĐỊNH DẠNG URL HÌNH ẢNH" 
-                                                            value="<?php echo $row[4] ?>" type="text" name="newsImg" style="">
+                                                             value="<?php echo $row[4] ?>" type="text" name="newsImg" required>
                                                         </div>
                                                     </div>
                                                     <div class="comfirm text-center">
-                                                        <button type="submit" name="submit" class="btn btn-success" style="margin: 0 40px;">Confirm</button>
+                                                        <button type="submit" name="submit" onclick='return confirm();' class="btn btn-success" style="margin: 0 40px;">Confirm</button>
                                                         <input type="" name="newsID" hidden value="<?php echo"$newsID"; ?>">
                                                         <a href="admin.news.php" class="btn btn-danger">Back</a>
                                                     </div>
@@ -138,6 +137,11 @@ $row = mysqli_fetch_array($rs);
         <script src="../../../assets/js/jquery-3.3.1.min.js"></script>
         <script src="../../../assets/js/popper.min.js"></script>
         <script src="../../../assets/js/bootstrap.min.js"></script>
+            <script>
+                function confirm(){
+                    return confirm('Bạn có muốn lưu chỉnh sửa ???');
+                }
+            </script>
     </body>
 
 </html>

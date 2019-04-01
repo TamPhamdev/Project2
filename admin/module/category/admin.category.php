@@ -2,7 +2,6 @@
 session_start();
 if ($_SESSION["permission"] != 'Category' && $_SESSION["permission"]!= 'All') {
     echo "<script>alert('BẠN KHÔNG ĐỦ QUYỀN TRUY CẬP TRANG NÀY. VUI LÒNG LIÊN HỆ ADMIN ĐỂ BIẾT THÊM CHI TIẾT');window.location.href = '../../index.php';</script>";
-    die();
 }
 ?>
 
@@ -22,7 +21,7 @@ if (isset($_POST["submit"])) {
     }
     else if(mysqli_query($cn, $sql) ) 
     {
-       echo "<script>alert('THÊM TÀI KHOẢN MỚI THÀNH CÔNG !!!');window.location.href = 'admin.category.php';</script>"; 
+       echo "<script>alert('THÊM CATEGORY MỚI THÀNH CÔNG !!!');window.location.href = 'admin.category.php';</script>"; 
     }
     
 }
@@ -97,7 +96,7 @@ if (isset($_POST["submit"])) {
                                                     <div class="form-group row mb-4 mt-4">
                                                     <label for="inputEmail3" class="col-sm-6 col-form-label">Enter new category</label>
                                                     <div class="col-sm-6">
-                                                        <input  class="form-control" type="text" name="newCate" required>
+                                                        <input  class="form-control" pattern="^[_A-z0-9]*((-|\s)*[_A-z0-9]){4,240}$" title="CHỮ KHÔNG DẤU, ÍT NHẤT 4 KÍ TỰ" type="text" name="newCate" required>
                                                     </div>
                                                 </div>
                                                     <div class="comfirm text-center">

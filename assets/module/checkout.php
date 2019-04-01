@@ -1,3 +1,11 @@
+<?php
+include_once '../../assets/common/connect.php';
+session_start();
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,49 +21,56 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
   <link rel="stylesheet" href="../css/bootstrap.min.css">
   <title>AHIHI Shop</title>
+  
+  <script type="text/javascript">
+       var baseurl = "/Ahihi_final/assets/common/";
+       
+        function clicksubmit(){
+            return confirm('Are you sure you want to buy?');
+            
+        }
+  </script>
 </head>
 
 <body>
   <div class="header">
-    <!--Header start-->
-    <nav class="navbar main-nav sticky-top navbar-expand-md navbar-expand-sm" id="nav">
-      <!--Navbar start-->
-      <a class="navbar-brand" href="../../index.html">AHIHI SHOP</a>
-      <button class="navbar-toggler  navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
-        aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon icon-bar"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-end" id="navbarTogglerDemo02">
-        <ul class="navbar-nav">
-          <li class="nav-item active">
-            <a class="nav-link" href="../../index.html">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="product.html" id="navbarDropdown" role="button" aria-haspopup="true"
-              aria-expanded="false">
-              Shop
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="product-detail.html">Clothes</a>
-              <a class="dropdown-item" href="product-detail.html">Shoes</a>
-              <a class="dropdown-item" href="product-detail.html">Something else here</a>
-            </div>
-          </li>
-          <li class="nav-item"><a class="nav-link" href="">About</a></li>
-          <!-- ul here -->
-          <li class="nav-item"><a class="nav-link" href="cart.html"><i class="fas fa-shopping-bag"></i></a></li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <i class="fas fa-search " aria-hidden="true"></i>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </div>
-  <!--Navbar End-->
+            <!--Header start-->
+            <nav class="navbar main-nav sticky-top navbar-expand-md navbar-expand-sm" id="nav">
+                <!--Navbar start-->
+                <a class="navbar-brand" href="../../index.php">AHIHI SHOP</a>
+                <button class="navbar-toggler  navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+                        aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon icon-bar"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarTogglerDemo02">
+                    <ul class="navbar-nav">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="../../index.php">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                       <li class="nav-item">
+                            <a class="nav-link " href="product.php" id="navbarDropdown" role="button" aria-haspopup="true"
+                               aria-expanded="false">
+                                Shop
+                            </a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link " href="news.php">News</a></li>
+                        <li class="nav-item"><a class="nav-link " href="about.php">About</a></li>
+                        <!-- ul here -->
+                        <li class="nav-item"><a id="cart" class="nav-link" href="javascript:void(0);"><i class="fas fa-shopping-bag"></i></a></li>
+                    </ul>
+                </div>
+                <div class="popup-cart" >
+                    
+                    <div class="list-cart">
+                        <div class="item-cart d-flex justify-content-between align-items-center">
+                                Your Cart is Empty!
+                        </div>         
+                    </div>
+                    
+                </div>
+            </nav>
+        </div>
 
-  <!--Carousel was here-->
 
 
   <div class="title-level col-xs-6">
@@ -65,14 +80,13 @@
           <h2 style="font-family: 'Montserrat';font-weight: 700" ;>Shop</h2>
         </div>
         <div class="col-md-4 title-bar mr-auto">
-          <span class="home-item"><a href="../../index.html">Home</a></span>
+          <span class="home-item"><a href="../../index.php">Home</a></span>
           <span class="separator">></span>
           <span class="current-item">Checkout</span>
         </div>
       </div>
     </div>
   </div>
-
 
 
   <div class="wrapper-checkout">
@@ -118,61 +132,95 @@
         </div>
       </div>
     </div>
-
+      <!--Toai-->
     <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th scope="col" class="">Product</th>
-                <th scope="col" class="">Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="product-name">Basic t-shirt x 1</td>
-                <td class="product-price">$9.99</td>
-              </tr>
-              <tr>
-                <th scope="row">Sub total</th>
-                <td class="product-price">$9.99</td>
-              </tr>
-              <tr>
-                <th scope="row">Total</th>
-                <td colspan="2" class="total-price">$9.99</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
+          <div class="row">
+            <div class="col-md-12">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th scope="col" class="">Product</th>
+                    <th scope="col" class="">Total</th>
+                  </tr>
+                </thead>
+      <?php 
+      
+            if(isset($_SESSION["shopping_cart"]))
+            {
+                $total = 0;
+                $cart_items = 0;
+                foreach ($_SESSION["shopping_cart"] as $k => $cart_itm)
+                {
+                   $product_id = $cart_itm["item_id"];
+                   $results = $cn->query("SELECT * FROM product WHERE PRO_ID ='$product_id'");
+                   $obj = $results->fetch_object();
+
+                   $html = '<tbody>
+                            <tr>
+                              <td class="product-name">'.$obj->PRO_NAME.' x '.$cart_itm["item_amount"].'</td>
+                              <td class="product-price">'.$cart_itm["item_price"].'$</td>
+                            </tr>';
+                   
+                    $subtotal = ($cart_itm["item_amount"] * $cart_itm["item_price"]);
+                    
+                    $total = ($total + $subtotal);
+
+                    $cart_items++;
+                    
+
+
+                    echo $html;
+                }
+                    
+
+                echo ' <tr>
+                          <td scope="row">Total</th>';
+                echo '<td colspan="2" class="total-price">'.number_format($total).'$</td>
+                        </tr>
+                      </tbody>';
+
+                
+            }else{
+                echo 'Giỏ hàng trống';
+            }       
+          
+            
+//            echo $data;
+    ?>
+                
+    </table></div></div></div>
+        
     <div class="container field-container">
       <div class="row">
         <div class="col-md-6">
           <h3>Billing details</h3>
           <div class="bill-fill-info">
-            <form action="#">
+              <form action="../common/addorder.php" name="" method="post">
+              <?php 
+                  include '../common/addorder.php';
+              ?>    
               <div class="container-fluid px-0">
                 <div class="row">
                   <div class="col-md-6">
                     <label for="firstname">First Name &nbsp;<i class="far fa-check-circle"></i></label>
 
-                    <input type="text" required>
+                    <input type="text" name="f_name" required>
                   </div>
                   <div class="col-md-6">
                     <label for="firstname">Last Name &nbsp;<i class="far fa-check-circle"></i></label>
-                    <input type="text" required>
+                    <input type="text" name="l_name" required>
                   </div>
                 </div>
                 <label for="firstname">Company Name</label>
-                <input type="text">
+                <input type="text" name="c_name">
                 <label for="firstname">Address &nbsp;<i class="far fa-check-circle"></i></label>
-                <input type="text" required>
+                <input type="text" name="address" required>
                 <label for="firstname">Phone number &nbsp;<i class="far fa-check-circle"></i></label><br>
-                <input type="text" pattern="[0-9]*" max="9" required> <br>
+                <input type="text" pattern="[0-9]*" name="phone" required> <br>
                 <label for="firstname">Email &nbsp;<i class="far fa-check-circle"></i></label>
-                <input type="email" required>
+                <input type="email" name="email" required>
+                
+                <input type="hidden" name="hidden_total" value="" />
                 <div class="form-check">
                   <label class="form-check-label">
                     <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue" data-target="#collapseCreateAccount"
@@ -183,8 +231,16 @@
                     <label for="firstname">Create account password <i class="far fa-check-circle"></i> </label>
                     <input type="password" placeholder="Password">
                   </div>
+                    
+
                 </div>
+                <div class="text-right mt-4">
+                    <button type="submit" name="btnbuy"  class="btn-order">Order</button>
+                </div>
+                  
               </div>
+                  
+                       
             </form>
           </div>
         </div>
@@ -196,10 +252,10 @@
               <input type="text" style="width:100%; height: 120px;">
             </form>
           </div>
-          <button class="btn-order" style="bottom: 0px;position:absolute;right:0px;">Order</button>
+<!--          <button type="submit" name="btnMua" id="btnMua" class="btn-order" style="bottom: 0px;position:absolute;right:0px;">Order</button>-->
         </div>
+          
       </div>
-      <!--End row-->
     </div>
   </div>
 
@@ -212,10 +268,8 @@
 
 
 
-
-
   <footer>
-    <!--Footer -->
+<!--    Footer -->
     <div class="container mx-auto">
       <div class="top-footer">
         <div class="row">
@@ -270,11 +324,12 @@
       </div>
     </div>
   </footer>
-  <!--End footer-->
+  End footer
   <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fas fa-angle-up" style="margin:0; padding: 0; width: 34px;"></i></button>
   <script src="../js/jquery-3.3.1.min.js"></script>
   <script src="../js/popper.min.js"></script>
   <script src="../js/bootstrap.min.js"></script>
+  <script src="../js/main.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       let nav = document.querySelector('#nav');
@@ -307,6 +362,17 @@
       }); // For Chrome, Firefox, IE and Opera
     }
   </script>
+  <script type="text/javascript">
+   
+   $(document).ready(function () {
+       var get_total = $(".table .total-price").text();
+       $('input[name=hidden_total]').val(parseInt(get_total));
+   })
+      
+   </script>
 </body>
 
+
+
 </html>
+

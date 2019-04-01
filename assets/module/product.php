@@ -43,8 +43,15 @@ include_once '../common/connect.php';
                         <li class="nav-item"><a class="nav-link " href="news.php">News</a></li>
                         <li class="nav-item"><a class="nav-link " href="about.php">About</a></li>
                         <!-- ul here -->
-                        <li class="nav-item"><a class="nav-link" href="cart.php"><i class="fas fa-shopping-bag"></i></a></li>
+                        <li class="nav-item"><a id="cart" class="nav-link" href="javascript:void(0);"><i class="fas fa-shopping-bag"></i></a></li>
                     </ul>
+                </div>
+                <div class="popup-cart" >
+                    <div class="list-cart">
+                        <div class="item-cart d-flex justify-content-between align-items-center">
+                                Your Cart is Empty!
+                        </div>         
+                    </div>
                 </div>
             </nav>
         </div>
@@ -83,6 +90,8 @@ include_once '../common/connect.php';
                             <form style="display: inline;" action="" method="get" role="button" aria-expanded="true">
                                 <select name="orderby" id="" class="select-form sort_by_price">
                                     <option value="menu-order" selected="selected">Default ordering</option>
+                                     <option value="a_z" class="a_z">Sort by name: A-Z</option>
+                                     <option value="z_a" class="z_a">Sort by name: Z-A</option>
                                     <option value="hight_price" class="hight_price"> Sort by price: Hight to low</option>
                                     <option value="low_price" class="low_price">Sort by price: Low to hight</option>
                                 </select>
@@ -98,7 +107,7 @@ include_once '../common/connect.php';
                             <input type="hidden" id="hidden_maximum_price" value="300" />
                             <p id="price_show" class="price">10 - 300</p>
                                  <div id="price_range"></div>
-
+                            <h5 class="mt-3 mb-3">Filter by Category</h5>
                             <?php
                             $query = "SELECT DISTINCT CATE_NAME"
                              . " FROM category"
@@ -114,7 +123,39 @@ include_once '../common/connect.php';
                                 </div>
                                 <?php
                             }
-                            ?>                      
+                            ?>      
+                              <h5 class="mt-3 mb-3">Filter by Season available</h5>
+                              <?php
+                            $query = "SELECT DISTINCT PRO_SEASON"
+                             . " FROM product"
+                             . " ORDER BY PRO_ID  DESC ";
+                            $statement1 = $connect->prepare($query);
+                            $statement1->execute();
+                            $result2 = $statement1->fetchAll();
+                            foreach ($result2 as $row) {
+                                ?>
+                                <div class="list-group-item checkbox">
+                                    <label><input type="checkbox" class="common_selector season" value="<?php echo $row['PRO_SEASON']; ?>"  > <?php echo $row['PRO_SEASON']; ?></label>
+                                </div>
+                                <?php
+                            }
+                            ?>         
+                              <h5 class="mt-3 mb-3">Filter by Gender available</h5>
+                              <?php
+                            $query = "SELECT DISTINCT PRO_GENDER"
+                             . " FROM product"
+                             . " ORDER BY PRO_ID  DESC ";
+                            $statement3 = $connect->prepare($query);
+                            $statement3->execute();
+                            $result4 = $statement3->fetchAll();
+                            foreach ($result4 as $row) {
+                                ?>
+                                <div class="list-group-item checkbox">
+                                    <label><input type="checkbox" class="common_selector gender" value="<?php echo $row['PRO_GENDER']; ?>"  > <?php echo $row['PRO_GENDER']; ?></label>
+                                </div>
+                                <?php
+                            }
+                            ?>         
                             <h3 class="widget-title">Top Rated Products</h3>
                             <div class="top-rate-product"> 
                                  <ul class="list-group-flush">
@@ -138,26 +179,7 @@ include_once '../common/connect.php';
                                 <?php
                             }
                             ?> </ul>                                
-<!--                                </li>
-                                <ul class="list-group-flush">
-                                    <li class="list-group-item d-flex align-items-center justify-content-between">
-                                        <a href="product-detail.php"><img src="../img/itemlist/asset 4.jpeg" alt="" class="img-list-group"></a>
-                                        <span>Striped Watch</span>
-                                        <span>$19.99</span>
-                                    </li>
-                                    <ul class="list-group-flush">
-                                        <li class="list-group-item d-flex align-items-center justify-content-between">
-                                            <a href=""><img src="../img/itemlist/asset 2.jpeg" alt="" class="img-list-group"></a>
-                                            <span>black glass</span>
-                                            <span>$20.99</span>
-                                        </li>
-                                        <ul class="list-group-flush">
-                                            <li class="list-group-item d-flex align-items-center justify-content-between">
-                                                <a href=""><img src="../img/itemlist/asset 13.jpeg" alt="" class="img-list-group"></a>
-                                                <span>Simple hat</span>
-                                                <span>$15.99</span>
-                                            </li>
-                                        </ul>-->
+
                             </div>
                                         </div>    
                                         <div class="col-md-9 column-right">
@@ -252,6 +274,7 @@ include_once '../common/connect.php';
                                         <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
                                         <script src="../js/popper.min.js"></script>
                                         <script src="../js/bootstrap.min.js"></script>
+                                        <script src="../js/main.js"></script>
                                         <script>
                                             document.addEventListener('DOMContentLoaded', function () {
                                                 let nav = document.querySelector('#nav');
@@ -285,25 +308,7 @@ include_once '../common/connect.php';
                                             }
 
 
-//                                            $(document).ready(function () {
-//                                                load_data();
-//                                                function load_data(page)
-//                                                {
-//                                                    $.ajax({
-//                                                        url: "data.filter.php",
-//                                                        method: "POST",
-//                                                        data: {page: page},
-//                                                        success: function (data) {
-//                                                            $('.filter_data').html(data);
-//                                                        }
-//                                                    })
-//                                                }
-//                                                $(document).on('click', '.pagination_link', function () {
-//                                                    var page = $(this).attr("id");
-//                                                    load_data(page);
-//                                                });
-//                                            });
-                                        
+
 $(document).ready(function(){
 
     filter_data();
@@ -315,13 +320,19 @@ $(document).ready(function(){
         var minimum_price = $('#hidden_minimum_price').val();
         var maximum_price = $('#hidden_maximum_price').val();
         var hight_price =  get_filter('hight_price');
-        var low_price = get_filter('low_price');;
+        var low_price = get_filter('low_price');
+        var a_z = get_filter('a_z');
+        var z_a = get_filter('z_a');
         var category = get_filter('category');
+        var season = get_filter('season');
+         var gender = get_filter('gender');
         var search_text = $('#search_text').val();
         $.ajax({
             url:"data.filter.php",
             method:"POST",
-            data:{page:page, action:action, minimum_price:minimum_price, maximum_price:maximum_price, category:category, hight_price:hight_price,low_price:low_price,search_text:search_text},
+            data:{page:page, action:action, minimum_price:minimum_price, maximum_price:maximum_price,
+            category:category, hight_price:hight_price,low_price:low_price,search_text:search_text,
+            season:season, gender:gender, a_z:a_z, z_a:z_a},
             success:function(data){
                 $('.filter_data').html(data);
             }

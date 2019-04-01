@@ -6,9 +6,7 @@ include_once '../common/connect.php';
 
 if(isset($_POST["action"]))
 {
-// $query = "SELECT * "
-//                . " FROM product, category"
-//                . " WHERE product.CATE_ID = category.CATE_ID AND PRO_STATUS = 'Active'";
+
 
 error_reporting(E_ALL & ~E_NOTICE & ~8192);  
  $record_per_page = 6;  
@@ -55,6 +53,21 @@ if(isset($_POST["search_text"]))
    AND CATE_NAME IN('".$cate_filter."') 
   ";
  }
+  if(isset($_POST["season"]))
+ {
+  $season_filter = implode("','", $_POST["season"]);
+  $query .= "
+   AND PRO_SEASON IN('".$season_filter."') 
+  ";
+ }
+  if(isset($_POST["gender"]))
+ {
+  $gender_filter = implode("','", $_POST["gender"]);
+  $query .= "
+   AND PRO_GENDER IN('".$gender_filter."') 
+  ";
+ }
+ // order price
  if(isset($_POST["hight_price"]))
  {
      $query .= "ORDER BY PRO_PRICE DESC";
@@ -62,7 +75,15 @@ if(isset($_POST["search_text"]))
   if(isset($_POST["low_price"]))
  {
      $query .= "ORDER BY PRO_PRICE ASC";
- } 
+ }
+ if(isset($_POST["a_z"]))
+ {
+     $query .= "ORDER BY PRO_NAME ASC";
+ }
+  if(isset($_POST["z_a"]))
+ {
+     $query .= "ORDER BY PRO_NAME DESC";
+ }  
  $query .= " LIMIT $start_from, $record_per_page"; 
 //$query .= " ORDER BY PRO_ID DESC";
  $statement = $connect ->prepare($query);
@@ -87,7 +108,7 @@ if(isset($_POST["search_text"]))
                         <span class="price">'.$row["PRO_GENDER"].'</span>
                       <span class="price">$'.$row["PRO_PRICE"].'</span>
                     </div>
-                    <a href="#"><i class="fas fa-shopping-cart cart-icon"></i></a>
+                    <a href="product-detail.php?id='.$row["PRO_ID"].'"><i class="fas fa-shopping-cart cart-icon"></i></a>
                   </div>
                 </div>
               </a>

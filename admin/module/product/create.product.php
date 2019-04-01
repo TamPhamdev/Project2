@@ -2,7 +2,6 @@
 session_start();
 if ($_SESSION["permission"] != 'Product' && $_SESSION["permission"]!= 'All') {
     echo "<script>alert('BẠN KHÔNG ĐỦ QUYỀN TRUY CẬP TRANG NÀY. VUI LÒNG LIÊN HỆ ADMIN ĐỂ BIẾT THÊM CHI TIẾT');window.location.href = '../../index.php';</script>";
-    exit();
 }
 ?>
 <?php
@@ -111,9 +110,9 @@ if (isset($_POST["create"])) {
                                             <div class="create-product text-left mx-auto d-flex justify-content-between">
                                                 <form action="" method="POST" style="width:100%;" >
                                                     <label for="nameProduct">Tên sản phẩm</label>
-                                                    <input type="text" id="nameProduct" required  pattern="^[_A-z0-9]*((-|\s)*[_A-z0-9]){6,240}$" title="CHỮ KHÔNG DẤU, ÍT NHẤT 6 KÍ TỰ" style="margin-left:60px;" name="proName"><br>
+                                                    <input type="text" id="nameProduct" required  pattern="^[_A-z0-9]*((-|\s)*[_A-z0-9]){6,240}$" title="CHỮ SỐ KHÔNG DẤU, ÍT NHẤT 6 KÍ TỰ" style="margin-left:60px;" name="proName"><br>
                                                     <label for="priceProduct">Giá cả</label>
-                                                    <input type="number"  pattern="0+\.[0-9]*[1-9][0-9]*$" min="0" onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                                                    <input type="number"  pattern="0+\.[0-9]*[1-9][0-9]{1,3}$" min="0"  onkeypress="return event.charCode >= 48 && event.charCode <= 57"
                                                            style="margin-left:114px;" id="priceProduct" name="proPrice" required ><br>
                                                     <label for="nameCategory">Chủng loại</label>
                                                     <select type="text" id="nameCategory" name="cateName" required style="margin-left:82px;"><!--
@@ -135,11 +134,11 @@ if (isset($_POST["create"])) {
                                                         <option value="Spring">Spring</option>
                                                     </select><br>
                                                     <label for="descriptionProduct">Mô tả</label>
-                                                    <input type="text" id="descriptionProduct" pattern="^[_A-z0-9]*((-|\s)*[_A-z0-9]){6,240}$" title="CHỮ KHÔNG DẤU, ÍT NHẤT 6 KÍ TỰ" 
+                                                    <input type="text" id="descriptionProduct" pattern="^[_A-z0-9]*((-|\s)*[_A-z0-9]){6,240}$" title="CHỮ SỐ KHÔNG DẤU, ÍT NHẤT 6 KÍ TỰ" 
                                                            name="proDescription" required  style="margin-left: 114px;"> <br>
                                                     <label for="imgProdct">Hình ảnh</label>
                                                     <input type="text" pattern="^((http[s]?|ftp):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.*)?(#[\w\-]+)?$"  
-                                                           id="inputGroupFile" name="proImg" style="margin-left:90px;" title="NHẬP ĐÚNG ĐỊNH DẠNG URL HÌNH ẢNH">
+                                                           id="inputGroupFile" name="proImg" required style="margin-left:90px;" title="NHẬP ĐÚNG ĐỊNH DẠNG URL HÌNH ẢNH">
                                                     <br>
                                                     <div class="comfirm text-center">
                                                         <button type="submit" class="btn btn-success" name="create" style="margin: 0 40px;">Xác nhận</button>

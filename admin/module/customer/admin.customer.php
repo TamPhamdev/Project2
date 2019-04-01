@@ -1,0 +1,238 @@
+<?php
+session_start();
+ if($_SESSION["permission"] != 'Customer' && $_SESSION["permission"]!= 'All')  
+ {  
+      echo "<script>alert('BẠN KHÔNG ĐỦ QUYỀN TRUY CẬP TRANG NÀY. VUI LÒNG LIÊN HỆ ADMIN ĐỂ BIẾT THÊM CHI TIẾT');window.location.href = '../../index.php';</script>";
+                  exit();
+ } 
+
+?>
+<?php
+    include '../../../assets/common/connect2.php';
+    include '../../../assets/common/permission.php';
+    if($cn == NULL)
+    {
+        exit();
+    }        
+    $sql = "select * from customer";
+    
+    $result = mysqli_query($cn, $sql);
+    if(mysqli_num_rows($result)==0)
+    {
+        die("<h3>Emty data store!!</h3>");
+    }        
+    
+    
+?>
+<html lang="en">
+
+<head>
+  <title>Admin Dashboard</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link href="../../../assets/css/admin.css" rel="stylesheet">
+  <link href="../../../assets/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+  <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+  <style>
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+</style>
+<script type="text/javascript">
+            // function to change class
+        function changeColor($elm, classes) {                
+            var className = $elm.attr('class');                
+            var index = $.inArray(className, classes);
+
+            $elm.removeClass(className);
+            index++;                
+            if (index === classes.length) {
+                index = 0;
+            }
+            $elm.addClass(classes[index]);                
+        }        
+        // equivalent to $(document).ready
+        $(function(){            
+            // cache button element
+            var $button = $("#dynamic-button");
+            var classes = ["btn btn-danger reset-underline", "btn btn-success reset-underline"];
+            // attach event with $button
+            $button.on("click", function (){                
+                changeColor($(this), classes);                
+            });
+        }); 
+       
+</script>
+</head>
+
+<body>
+  <header>
+    <nav class="navbar sticky-top navbar-expand-md navbar-expand-sm wow fadeInDown" id="nav">
+      <!--Navbar start-->
+      <a class="navbar-brand " href="../../index.php">Adminator</a>
+      <button class="navbar-toggler  navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+        aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon icon-bar"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarTogglerDemo02">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="../../module/account/account.php"> <i class="fas fa-user-secret"></i><?php  
+                echo '<span style="text-transform: uppercase;">Welcome - '.$_SESSION["username"].'</span>'; ?> <span
+                                    class="sr-only"></span></a>
+          </li>
+          <li class="nav-item"><a class="nav-link " href="../../logout.php">Logout</a></li>
+          <!-- ul here -->
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <div class="admin-layout">
+    <div class="admin-wrapper">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-3 col-sm-3 sidebar-left mx-auto">
+            <ul>
+              <li class="item-dashboard"><a href="../../index.php" class="reset-underline">Introduction</a></li>
+              <li class="item-dashboard"><a href="../../module/account/account.php" class="reset-underline"><i class="fas fa-user-secret"></i>Admin</a></li>
+              <li class="item-dashboard"><a href="../../module/product/admin.product.php" class="reset-underline"><i
+                    class="fas fa-box"></i>Product</a></li>
+              <li class="item-dashboard"><a href="../../module/category/admin.category.php" class="reset-underline"><i
+                    class="fas fa-clipboard-list"></i>Categories</a></li>
+              <li class="item-dashboard"><a href="../../module/order/admin.order.php" class="reset-underline"><i class="fas fa-dolly"></i>Order</a></li>
+              <li class="item-dashboard"><a href="../../module/customer/admin.customer.php" class="reset-underline"  style='color: #f5614d;'><i
+                    class="fas fa-user-friends"></i>Customer</a></li>
+              <li class="item-dashboard"><a href="../../module/news/admin.news.php" class="reset-underline"><i class="far fa-bell"></i>News</a></li>
+              <li class="item-dashboard"><a href="../../module/feedback/admin.feedback.php" class="reset-underline"><i
+                    class="far fa-envelope"></i>Feedback</a></li>
+              <li class="item-dashboard"><a href="../../module/comment/admin.comment.php" class="reset-underline"><i
+                    class="far fa-edit"></i>Comment</a></li>
+            </ul>
+          </div>
+          <div class="col-md-9 col-sm 9">
+            <div class="sidebar-right">
+              <div class="container">
+                <div class="row ">
+                  <div class="col-sm-12">
+                    <h3 class=" text-center">Customer management board</h3>                    
+                    <table class="table table-responsive margin-40">
+                      <thead>
+                        <tr>
+                          <th scope="col">ID</th>
+                          <th scope="col">CustomerId</th>
+                          <th scope="col">Name</th>
+                          <th scope="col">Email</th>
+                          <th scope="col">Tel</th>
+                          <th scope="col">Address</th>
+<!--                          <th scope="col">Member</th>-->
+                          <th scope="col"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                          <?php
+                        while ($row = mysqli_fetch_array($result)) {
+                            echo "<tr>";
+                            //echo "<td>". $row[0] ."</td>"; //[0]
+                            echo "<td>". $row[0] ."</td>"; //[1]
+                            echo "<td>". $row[1] ."</td>"; //[2]
+                            echo "<td>". $row[3] ."</td>"; //[2]
+                            echo "<td>". $row[4] ."</td>"; //[2]
+                            echo "<td>". $row[5] ."</td>"; //[2]
+                            echo "<td>". $row[6] ."</td>"; //[2]
+//                             echo "<td>".
+//                              "<label class='switch'>".
+//                                "<input type='checkbox' checked>".
+//                                "<span class='slider round'>".$row[2]."</span>".
+//                              "</label>".
+//                            "</td>";
+//                            echo "<td><a href='delete.order.php?id=$row[0]' class='btn btn-danger' onclick = 'return checkDelete()'>Block</a></td>";
+                            //echo "<td><a href='#' id='dynamic-button' class='btn btn-danger reset-underline' >Block</a></td>";
+                            echo "</tr>";
+                        }
+                        mysqli_close($cn);
+                        ?>
+                        
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+  <script src="../../../assets/js/jquery-3.3.1.min.js"></script>
+  <script src="../../../assets/js/popper.min.js"></script>
+  <script src="../../../assets/js/bootstrap.min.js"></script>
+  
+</body>
+
+</html>

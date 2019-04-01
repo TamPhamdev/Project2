@@ -1,4 +1,5 @@
 <?php
+//trang của Tâm
 include_once './assets/common/connect.php';
 $sql = "SELECT PRO_ID, PRO_NAME, PRO_PRICE,PRO_IMG, CATE_NAME, PRO_DESCRIPTION,PRO_SEASON,PRO_GENDER"
         . " FROM product, category"
@@ -10,6 +11,8 @@ if (mysqli_num_rows($rs) == 0) {
     die("<h3>Không có dữ liệu admin </h3><br>");
 }
 $row = mysqli_fetch_array($rs);
+
+$get_url = "./assets/module/checkout.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,9 +55,15 @@ $row = mysqli_fetch_array($rs);
                         <li class="nav-item"><a class="nav-link " href="assets/module/news.php">News</a></li>
                         <li class="nav-item"><a class="nav-link " href="assets/module/about.php">About</a></li>
                         <!-- ul here -->
-                        <li class="nav-item"><a class="nav-link" href="assets/module/cart.php"><i class="fas fa-shopping-bag"></i></a></li>
-
+                        <li class="nav-item"><a id="cart" class="nav-link" href="javascript:void(0);"><i class="fas fa-shopping-bag"></i></a></li>
                     </ul>
+                </div>
+                <div class="popup-cart" >
+                    <div class="list-cart">
+                        <div class="item-cart d-flex justify-content-between align-items-center">
+                                Your Cart is Empty!
+                        </div>         
+                    </div>
                 </div>
             </nav>
             <!--Navbar End-->
@@ -189,7 +198,7 @@ $row = mysqli_fetch_array($rs);
                                                                 <strike class="price"><?php echo $row["PRO_GENDER"] ?></strike>
                                                                 <span class="price">$<?php echo $row["PRO_PRICE"] ?></span>
                                                             </div>
-                                                            <a href="#"><i class="fas fa-shopping-cart cart-icon"></i></a>
+                                                            <a href="assets/module/product-detail.php?id=<?php echo $row["PRO_ID"] ?>"><i class="fas fa-shopping-cart cart-icon"></i></a>
                                                         </div>
                                                     </div>
                                                 </a> 
@@ -224,13 +233,13 @@ $row = mysqli_fetch_array($rs);
                                                                 <strike class="price"><?php echo $row["PRO_GENDER"] ?></strike>
                                                                 <span class="price">$<?php echo $row["PRO_PRICE"] ?></span>
                                                             </div>
-                                                            <a href="#"><i class="fas fa-shopping-cart cart-icon"></i></a>
+                                                            <a href="assets/module/product-detail.php?id=<?php echo $row["PRO_ID"] ?>"><i class="fas fa-shopping-cart cart-icon"></i></a>
                                                         </div>
                                                     </div>
                                                 </a> 
-    <?php
-}
-?> 
+                                         <?php
+                                            }
+                                            ?> 
 
                                         </div>
                                     </div>
@@ -283,7 +292,7 @@ foreach ($result1 as $row) {
                                                                 <strike class="price"><?php echo $row["PRO_GENDER"] ?></strike>
                                                                 <span class="price">$<?php echo $row["PRO_PRICE"] ?></span>
                                                             </div>
-                                                            <a href="#"><i class="fas fa-shopping-cart cart-icon"></i></a>
+                                                            <a href="assets/module/product-detail.php?id=<?php echo $row["PRO_ID"] ?>"><i class="fas fa-shopping-cart cart-icon"></i></a>
                                                         </div>
                                                     </div>
                                                 </a> 
@@ -317,7 +326,7 @@ foreach ($result1 as $row) {
                                                                 <strike class="price"><?php echo $row["PRO_GENDER"] ?></strike>
                                                                 <span class="price">$<?php echo $row["PRO_PRICE"] ?></span>
                                                             </div>
-                                                            <a href="#"><i class="fas fa-shopping-cart cart-icon"></i></a>
+                                                            <a href="assets/module/product-detail.php?id=<?php echo $row["PRO_ID"] ?>"><i class="fas fa-shopping-cart cart-icon"></i></a>
                                                         </div>
                                                     </div>
                                                 </a> 
@@ -569,10 +578,21 @@ foreach ($result1 as $row) {
         <script src="assets/js/jquery-3.3.1.min.js"></script>
         <script src="assets/js/popper.min.js"></script>
         <script src="assets/js/bootstrap.min.js"></script>
+        <script src="assets/js/main.js"></script>
         <script src='https://cdn.rawgit.com/matthieua/WOW/1.0.1/dist/wow.min.js'></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+               var url = window.location.href;
+               var idex = url.replace("/index.php","/assets/module/checkout.php");
+               console.log(url);
+               $("#cart").click(function(){
+                  $("#out-js").attr("href",idex);
+               });
+           });
+        </script>
         <script>
             //  Time counter
-            const countDownDate = new Date("Jan 10, 2019 20:00:00").getTime();
+            const countDownDate = new Date("April 10, 2019 20:00:00").getTime();
             let countSecond = setInterval(function () {
                 let now = new Date().getTime();
                 let distance = countDownDate - now;
@@ -583,7 +603,7 @@ foreach ($result1 as $row) {
                 document.getElementById("countdownEvent").innerHTML = days + "d " + hours + "h " +
                         minutes + "m " + seconds + "s ";
                 if (distance < 0) {
-                    clearInterval(x);
+                    clearInterval(countSecond);
                     document.getElementById("countdownEvent").innerHTML = "EXPIRED";
                 }
             }, 1000);
@@ -660,7 +680,7 @@ foreach ($result1 as $row) {
                         <span class="item-text">${gender}</span>
                         <span class="price">$${price}</span>
                       </div>
-                      <a href="#"><i class="fas fa-shopping-cart cart-icon"></i></a>
+                      <a href="assets/module/product-detail.php?id=${id}"><i class="fas fa-shopping-cart cart-icon"></i></a>
                     </div>
                   </div>
                 </a>

@@ -2,7 +2,6 @@
 session_start();
 if ($_SESSION["permission"] != 'Feedback' && $_SESSION["permission"]!= 'All') {
     echo "<script>alert('BẠN KHÔNG ĐỦ QUYỀN TRUY CẬP TRANG NÀY. VUI LÒNG LIÊN HỆ ADMIN ĐỂ BIẾT THÊM CHI TIẾT');window.location.href = '../../index.php';</script>";
-    exit();
 }
 ?>
 <?php

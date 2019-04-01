@@ -3,7 +3,6 @@ session_start();
  if($_SESSION["permission"] != 'News' && $_SESSION["permission"]!= 'All')  
  {  
       echo "<script>alert('BẠN KHÔNG ĐỦ QUYỀN TRUY CẬP TRANG NÀY. VUI LÒNG LIÊN HỆ ADMIN ĐỂ BIẾT THÊM CHI TIẾT');window.location.href = '../../index.php';</script>";
-                  exit();
  } 
 
 ?>
@@ -142,7 +141,7 @@ include '../../../assets/common/connect.php';
                           <td class="text-muted">${date}</td>
                           <td><a href="../../../assets/module/news.detail.php?id=${id}" class="btn btn-success">View</a></td>
                           <td><a href="edit.news.php?id=${id}" class="btn btn-success reset-underline">Edit</a></td>
-                          <td><a href="delete.news.php?id=${id}" class="btn btn-danger reset-underline">Delete</a></td>
+                          <td><a href="delete.news.php?id=${id}" onclick='return alert();' class="btn btn-danger reset-underline">Delete</a></td>
                         </tr>
                            `
                     }
@@ -153,6 +152,11 @@ include '../../../assets/common/connect.php';
         <script src="../../../assets/js/jquery-3.3.1.min.js"></script>
         <script src="../../../assets/js/popper.min.js"></script>
         <script src="../../../assets/js/bootstrap.min.js"></script>
+        <script>
+            function alert(){
+              return  confirm("Bạn có muốn xóa tin này ???");
+            }
+        </script>
 </body>
 
 </html>

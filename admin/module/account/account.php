@@ -2,7 +2,6 @@
 session_start();
 if ($_SESSION["permission"] != 'All') {
     echo "<script>window.location.href = 'changepass.php';</script>";
-    die();
 }
 ?>
 
@@ -17,13 +16,13 @@ if (isset($_POST["submit"])) {
     $password1 = md5($password1);
     $password2 = md5($password2);
     $username = mysqli_real_escape_string($cn, $_SESSION['username']);
-
     if ($password1 <> $password2) {
         echo "<script>alert('PASSWORD KHÔNG TRÙNG VUI LÒNG THỬ LẠI !!!');window.location.href = 'account.php';</script>";
         exit();
-    } else if (mysqli_query($cn, "UPDATE account SET ACC_PASS='$password1' WHERE ACC_NAME='$username'")) {
+    }  else if (mysqli_query($cn, "SELECT ACC_PASS FROM account WHERE ACC_NAME='$username'")) {
         echo "<script>alert('BẠN ĐÃ ĐỔI PASSWORD THÀNH CÔNG !!!');window.location.href = 'account.php';</script>";
-    } else {
+    } 
+    else {
         mysqli_error($cn);
     }
 

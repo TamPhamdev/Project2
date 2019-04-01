@@ -14,7 +14,7 @@ $sql = "SELECT PRO_ID, PRO_NAME, PRO_PRICE,PRO_IMG, CATE_NAME, PRO_DESCRIPTION,P
 $rs = mysqli_query($cn, $sql);
 
 
-$sql1 = "SELECT * FROM comment WHERE PRO_ID =". $prodetail_ID;
+$sql1 = "SELECT * FROM comment WHERE PRO_ID =$prodetail_ID ORDER BY COMMENT_ID DESC";
 $rs1 = mysqli_query($cn, $sql1);
 
 if (mysqli_num_rows($rs) == 0) {
@@ -63,8 +63,15 @@ $row = mysqli_fetch_array($rs);
                         <li class="nav-item"><a class="nav-link " href="news.php">News</a></li>
                         <li class="nav-item"><a class="nav-link " href="about.php">About</a></li>
                         <!-- ul here -->
-                        <li class="nav-item"><a class="nav-link" href="cart.php"><i class="fas fa-shopping-bag"></i></a></li>
+                       <li class="nav-item"><a id="cart" class="nav-link" href="javascript:void(0);"><i class="fas fa-shopping-bag"></i></a></li>
                     </ul>
+                </div>
+                <div class="popup-cart" >
+                    <div class="list-cart">
+                        <div class="item-cart d-flex justify-content-between align-items-center">
+                                Your Cart is Empty!
+                        </div>         
+                    </div>
                 </div>
             </nav>
         </div>
@@ -91,7 +98,7 @@ $row = mysqli_fetch_array($rs);
             <div class="container-fluid">
                 <div class="row px-lg-5">
                     <div class="col-md-6 col-xs-6">
-                        <div class="layoutleft mx-3" style="background-image: url('<?php echo $row[3] ?>')">
+                        <div class="layoutleft mx-3 img-pro" data-img="<?php echo $row[3] ?>" style="background-image: url('<?php echo $row[3] ?>')">
 
                         </div>
                     </div>
@@ -101,19 +108,20 @@ $row = mysqli_fetch_array($rs);
                                 <div class="product-title">
                                     <h1><?php echo $row[1] ?></h1>
                                 </div>
-                                <div class="product-price"><span>$<?php echo $row[2] ?></span>
+                                 <div class="product-price"><span>$<span class="get-price"><?php echo $row[2] ?></span></span>
                                     <a href="#review-tab" class="review-link">(<?php echo mysqli_num_rows($rs1)?> customer reviews)</a>
                                 </div>
 
                                 <!--              <div class="product-description">
                                                 <p><?php echo $row[4] ?></p>
                                               </div>-->
-                                <form action="#" class="cart">
+                                <form method="post" action="../common/action.php" class="cart cart-form">
                                     <input type="number" min="1" value="1" step="1" class="cart-quantity">
-                                    <button type="submit" name="#" class="add-to-cart-btn"><i class="fas fa-shopping-bag"></i><span>add
+                                   <a  id="<?php echo $row[0] ?>" name="#" class="add-to-cart-btn add-to-cart-js" style="color:#fff;"><i class="fas fa-shopping-bag"></i><span>add
                                             to cart</span>
-                                    </button>
+                                    </a>
                                 </form>
+                                <div id="cart_details" style="display:none;"></div>
                                 <div class="categories">
                                     <span class="cate-title">Categories: </span>
                                     <a href="#0" style="cursor: default;" class="cate-title reset-underline"><?php echo $row[4] ?></a>
@@ -231,8 +239,8 @@ $row = mysqli_fetch_array($rs);
                                                             <input type="text" name="txtname" value size="30" required>
                                                         </div>
                                                         <div class="comment-email">
-                                                            <label for="comment">Email &nbsp;<i class="far fa-check-circle"></i></label><br>
-                                                            <input type="email" name="txtemail" value size="30" required>
+                                                            <label for="comment">Email  &nbsp;<i class="far fa-check-circle"></i></label><br>
+                                                            <input type="email" name="txtemail" value size="30">
                                                         </div>
                                                         <div class="form-submit">
                                                             <input type="submit" name="btnsubmit" class="submit">
@@ -338,6 +346,7 @@ $row = mysqli_fetch_array($rs);
         <script src="../js/jquery-3.3.1.min.js"></script>
         <script src="../js/popper.min.js"></script>
         <script src="../js/bootstrap.min.js"></script>
+          <script src="../js/main.js"></script>
         <script>
             document.addEventListener('DOMContentLoaded', function () {
                 let nav = document.querySelector('#nav');
@@ -408,9 +417,10 @@ $row = mysqli_fetch_array($rs);
                     </div>
                     <div style="display:flex; justify-content: space-between;">
                       <div class="price-item">
-                        <span class="price">${price}</span>
+                          <span class="price">${gender}</span>
+                        <span class="price">$${price}</span>
                       </div>
-                      <a href="#"><i class="fas fa-shopping-cart cart-icon"></i></a>
+                      <a href="product-detail.php?id=${id}"><i class="fas fa-shopping-cart cart-icon"></i></a>
                     </div>
                   </div>
                 </a>

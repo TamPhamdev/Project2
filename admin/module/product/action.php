@@ -51,6 +51,7 @@ if (isset($_POST["action"])) {
                     <td>' . $row["PRO_SEASON"] . '</td>
                     <td>' . $status . '</td>
                     <td><a href="edit.product.php?id='.$row["PRO_ID"].'" class="btn btn-success reset-underline">EDIT</a></td>
+                    <td><a href="delete.product.php?id='.$row["PRO_ID"].'" class="btn btn-danger reset-underline">DELETE</a></td>
                     <td><button type="button"  name="action" data-pro_id="' . $row["PRO_ID"] . '"    data-pro_status="' . $row["PRO_STATUS"] . '"  class="action btn btn-danger reset-underline">ACTION</button></td>    
                  </tr>                                   
                </form>

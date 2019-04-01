@@ -18,7 +18,6 @@
            $password = mysqli_real_escape_string($connect, $_POST["password"]);  
            $password = md5($password);  
            $query = "SELECT * FROM account WHERE ACC_NAME = '$username' AND ACC_PASS = '$password'"; 
-           echo $query;
            $result = mysqli_query($connect, $query);
            $row = mysqli_fetch_array($result);
            $role = $row[3];
@@ -90,29 +89,7 @@
               </div>
 
                <input type="submit" name="login" value="Login" class="btn btn-info" />  
-               <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModalLong">Forget password ???</button>
-               <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-          <h5>Admin 123456</h5> <br>
-          <h5>KhuongKhuong 123456</h5> <br>
-           <h5>TamTam 123123</h5> <br>
-            <h5>ToaiToai 123123</h5> <br>
-             <h5>BachBach 123123</h5> <br>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-info" data-dismiss="modal">OK</button>
-      </div>
-    </div>
-  </div>
-</div>
+              
             </form>
           </div>
         </div>

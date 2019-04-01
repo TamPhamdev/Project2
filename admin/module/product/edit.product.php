@@ -157,7 +157,7 @@ $productID = "";
                                                         <div class="col-sm-6">
                                                             <input class="form-control" type="text" 
                                                            pattern="^((http[s]?|ftp):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.*)?(#[\w\-]+)?$" 
-                                                           id="inputGroupFile" name="proImg" row="4" title="NHẬP ĐÚNG ĐỊNH DẠNG URL HÌNH ẢNH" value="<?php echo "$row[3]" ?>"> 
+                                                           id="inputGroupFile" name="proImg" required row="4" title="NHẬP ĐÚNG ĐỊNH DẠNG URL HÌNH ẢNH" value="<?php echo "$row[3]" ?>"> 
                                                         </div>    
                                                     </div>     
                                                       <div class="comfirm text-center">
