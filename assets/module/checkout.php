@@ -324,7 +324,7 @@ session_start();
       </div>
     </div>
   </footer>
-  End footer
+ 
   <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fas fa-angle-up" style="margin:0; padding: 0; width: 34px;"></i></button>
   <script src="../js/jquery-3.3.1.min.js"></script>
   <script src="../js/popper.min.js"></script>
